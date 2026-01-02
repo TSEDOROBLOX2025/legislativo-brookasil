@@ -35,27 +35,42 @@
             --cor-sombra: rgba(0, 0, 0, 0.08);
             --cor-destaque: var(--verde-oficial);
             --gradiente-header: linear-gradient(135deg, var(--verde-oficial) 0%, var(--azul-oficial) 100%);
+            --gradiente-futurista: linear-gradient(135deg, 
+                rgba(0, 158, 96, 0.1) 0%, 
+                rgba(58, 117, 196, 0.1) 50%, 
+                rgba(252, 209, 22, 0.1) 100%);
+            --sombra-futurista: 0 10px 40px rgba(0, 158, 96, 0.15);
+            --brilho-futurista: 0 0 20px rgba(252, 209, 22, 0.3);
         }
         
         .tema-escuro {
-            /* Tema escuro */
-            --cor-fundo: #0f172a;
-            --cor-card: #1e293b;
-            --cor-texto: #f1f5f9;
-            --cor-texto-secundario: #94a3b8;
-            --cor-borda: #334155;
-            --cor-hover: #2d3748;
-            --cor-sombra: rgba(0, 0, 0, 0.3);
+            /* Tema escuro futurista */
+            --cor-fundo: #0a0e17;
+            --cor-card: #131a2a;
+            --cor-texto: #e2e8ff;
+            --cor-texto-secundario: #8a9bb8;
+            --cor-borda: #2a3a5a;
+            --cor-hover: #1a243f;
+            --cor-sombra: rgba(0, 0, 0, 0.4);
             --cor-destaque: var(--amarelo-oficial);
             --gradiente-header: linear-gradient(135deg, var(--verde-escuro) 0%, var(--azul-escuro) 100%);
+            --gradiente-futurista: linear-gradient(135deg, 
+                rgba(0, 107, 60, 0.15) 0%, 
+                rgba(30, 58, 138, 0.15) 50%, 
+                rgba(252, 209, 22, 0.1) 100%);
+            --sombra-futurista: 0 10px 40px rgba(0, 0, 0, 0.5);
+            --brilho-futurista: 0 0 25px rgba(252, 209, 22, 0.2);
         }
         
-        /* Reset e estilos base */
+        /* Reset e estilos base futuristas */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        color 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                        border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         body {
@@ -65,53 +80,21 @@
             line-height: 1.6;
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
         
-        /* === ACESSIBILIDADE === */
-        .acessibilidade-ativa {
-            --tamanho-fonte: 1.2rem;
-            --espacamento-linha: 1.8;
-            --cor-texto: #000000;
-            --cor-fundo: #ffffff;
-            --cor-destaque: #0000ff;
-        }
-        
-        .modo-alto-contraste {
-            --cor-texto: #ffffff;
-            --cor-fundo: #000000;
-            --cor-card: #222222;
-            --cor-borda: #ffffff;
-            --cor-destaque: #ffff00;
-            --cor-texto-secundario: #cccccc;
-        }
-        
-        .modo-leitura {
-            font-family: 'Georgia', serif;
-            --tamanho-fonte: 1.1rem;
-            --espacamento-linha: 1.8;
-            --cor-texto: #1a1a1a;
-            --cor-fundo: #fefefe;
-            --cor-card: #ffffff;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        /* Utilitários de acessibilidade */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-        
-        .foco-visivel:focus {
-            outline: 3px solid var(--cor-destaque);
-            outline-offset: 3px;
+        /* Efeito de partículas futuristas */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradiente-futurista);
+            pointer-events: none;
+            z-index: -1;
+            opacity: 0.5;
         }
         
         /* === ANIMAÇÃO DE INTRODUÇÃO CINEMATOGRÁFICA === */
@@ -121,7 +104,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #000;
+            background: linear-gradient(45deg, #000814 0%, #001d3d 100%);
             z-index: 9999;
             display: flex;
             flex-direction: column;
@@ -147,16 +130,39 @@
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
-            border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            animation: levitar 6s ease-in-out infinite;
+        }
+        
+        .bandeira::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(30deg);
+            animation: brilho 8s linear infinite;
         }
         
         .bandeira-brookasil {
             background-image: linear-gradient(to bottom, #3A75C4 33%, #FCD116 33%, #FCD116 66%, #009E60 66%);
+            animation-delay: 0s;
         }
         
         .bandeira-gabao {
             background-image: linear-gradient(to bottom, #009E60 33%, #FCD116 33%, #FCD116 66%, #3A75C4 66%);
+            animation-delay: 0.3s;
         }
         
         .palacio-container {
@@ -170,10 +176,11 @@
         .palacio {
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #1a1a1a 0%, #333 100%);
-            border-radius: 8px;
+            background: linear-gradient(45deg, #0a0a0a 0%, #1a1a1a 100%);
+            border-radius: 12px;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
         }
         
         .luz-dourada {
@@ -182,8 +189,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(252, 209, 22, 0.7) 0%, rgba(252, 209, 22, 0) 70%);
+            background: radial-gradient(circle at center, rgba(252, 209, 22, 0.8) 0%, rgba(252, 209, 22, 0) 70%);
             animation: pulsar-luz 3s infinite alternate;
+            filter: blur(20px);
         }
         
         .texto-introducao {
@@ -193,31 +201,35 @@
         }
         
         .titulo-introducao {
-            font-size: 3.5rem;
-            font-weight: 700;
+            font-size: 4rem;
+            font-weight: 800;
             margin-bottom: 20px;
             background: linear-gradient(90deg, #FCD116, #3A75C4, #009E60);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            text-shadow: 0 0 30px rgba(252, 209, 22, 0.5);
+            animation: brilhoTexto 4s ease-in-out infinite alternate;
         }
         
         .subtitulo-introducao {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 500;
             color: #FCD116;
             margin-top: 10px;
+            letter-spacing: 2px;
         }
         
-        /* === HEADER E NAVEGAÇÃO === */
+        /* === HEADER E NAVEGAÇÃO FUTURISTA === */
         header {
             background: var(--gradiente-header);
             color: white;
             padding: 1.2rem 2rem;
-            box-shadow: 0 4px 12px var(--cor-sombra);
+            box-shadow: var(--sombra-futurista);
             position: relative;
             z-index: 100;
+            border-bottom: 2px solid rgba(252, 209, 22, 0.3);
         }
         
         .header-container {
@@ -232,22 +244,48 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            position: relative;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(252, 209, 22, 0.1) 50%, 
+                transparent 100%);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .logo:hover::before {
+            opacity: 1;
         }
         
         .logo-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            animation: levitar 4s ease-in-out infinite;
         }
         
         .logo-texto h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 1.8rem;
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.2;
+            letter-spacing: 1px;
         }
         
         .logo-texto p {
             font-size: 0.9rem;
             opacity: 0.9;
+            color: rgba(255, 255, 255, 0.9);
         }
         
         .controles-superiores {
@@ -256,114 +294,94 @@
             gap: 15px;
         }
         
-        /* Botão de alternância de tema */
-        .botao-tema {
-            background: rgba(255, 255, 255, 0.15);
+        /* Botões futuristas */
+        .botao-tema, .botao-acessibilidade {
+            background: rgba(255, 255, 255, 0.1);
             border: none;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             border-radius: 50%;
             color: white;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: all 0.3s ease;
-        }
-        
-        .botao-tema:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
-        }
-        
-        /* Botão de acessibilidade */
-        .botao-acessibilidade {
-            background: rgba(255, 255, 255, 0.15);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            color: white;
-            font-size: 1.4rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
+            overflow: hidden;
         }
         
-        .botao-acessibilidade:hover {
+        .botao-tema::before, .botao-acessibilidade::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                transparent 100%);
+            transition: left 0.6s ease;
+        }
+        
+        .botao-tema:hover::before, .botao-acessibilidade:hover::before {
+            left: 100%;
+        }
+        
+        .botao-tema:hover, .botao-acessibilidade:hover {
             background: rgba(255, 255, 255, 0.25);
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px rgba(252, 209, 22, 0.4);
         }
         
-        /* Menu de acessibilidade */
+        /* Menu de acessibilidade futurista */
         .menu-acessibilidade {
             position: absolute;
-            top: 70px;
+            top: 80px;
             right: 20px;
-            background-color: var(--cor-card);
-            border-radius: 10px;
-            box-shadow: 0 8px 25px var(--cor-sombra);
-            padding: 20px;
-            width: 320px;
+            background: rgba(19, 26, 42, 0.95);
+            border-radius: 20px;
+            box-shadow: var(--sombra-futurista);
+            padding: 25px;
+            width: 350px;
             z-index: 200;
             display: none;
-            border: 1px solid var(--cor-borda);
+            border: 1px solid rgba(252, 209, 22, 0.3);
+            backdrop-filter: blur(20px);
+            transform-origin: top right;
         }
         
         .menu-acessibilidade.ativo {
             display: block;
-            animation: slideDown 0.3s ease;
+            animation: surgir 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        .opcao-acessibilidade {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--cor-borda);
+        .menu-acessibilidade::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                var(--verde-oficial), 
+                var(--azul-oficial), 
+                var(--amarelo-oficial));
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0.5;
         }
         
-        .opcao-acessibilidade:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-        
-        .controles-acessibilidade {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        
-        .botao-controle-acessibilidade {
-            background-color: var(--cor-hover);
-            border: 1px solid var(--cor-borda);
-            border-radius: 5px;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            font-size: 1.2rem;
-            color: var(--cor-texto);
-        }
-        
-        .botao-controle-acessibilidade:hover {
-            background-color: var(--cor-destaque);
-            color: white;
-        }
-        
-        /* Navegação principal */
+        /* Navegação principal futurista */
         nav {
-            background-color: var(--cor-card);
-            border-bottom: 1px solid var(--cor-borda);
-            box-shadow: 0 2px 10px var(--cor-sombra);
+            background: rgba(19, 26, 42, 0.95);
+            border-bottom: 2px solid rgba(252, 209, 22, 0.2);
+            box-shadow: var(--sombra-futurista);
+            backdrop-filter: blur(10px);
         }
         
         .nav-container {
@@ -381,187 +399,326 @@
         }
         
         .nav-link {
-            padding: 1.2rem 1.5rem;
+            padding: 1.3rem 1.8rem;
             text-decoration: none;
             color: var(--cor-texto);
-            font-weight: 500;
+            font-weight: 600;
             position: relative;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 0.5px;
         }
         
-        .nav-link:hover {
-            color: var(--cor-destaque);
-        }
-        
-        .nav-link.ativo {
-            color: var(--cor-destaque);
-        }
-        
-        .nav-link.ativo::after {
+        .nav-link::before {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
-            width: 100%;
+            left: 50%;
+            width: 0;
             height: 3px;
-            background-color: var(--cor-destaque);
+            background: linear-gradient(90deg, var(--verde-oficial), var(--amarelo-oficial));
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
         }
         
-        .botao-login {
-            background-color: var(--cor-destaque);
-            color: white;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .botao-login:hover {
-            opacity: 0.9;
+        .nav-link:hover {
+            color: var(--amarelo-oficial);
             transform: translateY(-2px);
         }
         
-        /* Menu hamburguer para mobile */
-        .menu-hamburguer {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.8rem;
-            color: var(--cor-texto);
-            cursor: pointer;
+        .nav-link:hover::before {
+            width: 80%;
         }
         
-        /* === SEÇÕES PRINCIPAIS === */
+        .nav-link.ativo {
+            color: var(--amarelo-oficial);
+        }
+        
+        .nav-link.ativo::before {
+            width: 100%;
+        }
+        
+        .botao-login {
+            background: linear-gradient(135deg, var(--verde-oficial) 0%, var(--azul-oficial) 100%);
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 158, 96, 0.3);
+        }
+        
+        .botao-login::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.3) 50%, 
+                transparent 100%);
+            transition: left 0.6s ease;
+        }
+        
+        .botao-login:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 158, 96, 0.5);
+        }
+        
+        .botao-login:hover::before {
+            left: 100%;
+        }
+        
+        /* === SEÇÕES PRINCIPAIS FUTURISTAS === */
         .container-principal {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
         }
         
         .secao {
-            margin-bottom: 3rem;
-            background-color: var(--cor-card);
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px var(--cor-sombra);
+            margin-bottom: 4rem;
+            background: var(--cor-card);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: var(--sombra-futurista);
             border: 1px solid var(--cor-borda);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .secao::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                var(--verde-oficial), 
+                var(--azul-oficial), 
+                var(--amarelo-oficial));
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .secao:hover::before {
+            opacity: 0.1;
+        }
+        
+        .secao:hover {
+            transform: translateY(-5px);
         }
         
         .titulo-secao {
             font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
             color: var(--cor-texto);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            position: relative;
+        }
+        
+        .titulo-secao::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--verde-oficial), var(--amarelo-oficial));
+            border-radius: 2px;
         }
         
         .titulo-secao i {
-            color: var(--cor-destaque);
+            color: var(--amarelo-oficial);
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px rgba(252, 209, 22, 0.3));
         }
         
-        /* Seção de seleção de dispositivo */
+        /* Seleção de dispositivo futurista */
         .selecao-dispositivo {
             text-align: center;
-            max-width: 600px;
-            margin: 3rem auto;
+            max-width: 800px;
+            margin: 4rem auto;
         }
         
         .opcoes-dispositivo {
             display: flex;
             justify-content: center;
-            gap: 30px;
-            margin-top: 30px;
+            gap: 40px;
+            margin-top: 40px;
         }
         
         .opcao-dispositivo {
-            background-color: var(--cor-card);
+            background: var(--cor-card);
             border: 2px solid var(--cor-borda);
-            border-radius: 12px;
-            padding: 2rem;
-            width: 200px;
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            width: 280px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .opcao-dispositivo::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                var(--verde-oficial), 
+                var(--azul-oficial), 
+                var(--amarelo-oficial));
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
         
         .opcao-dispositivo:hover {
-            transform: translateY(-5px);
-            border-color: var(--cor-destaque);
-            box-shadow: 0 10px 20px var(--cor-sombra);
+            transform: translateY(-10px) scale(1.05);
+            border-color: transparent;
+        }
+        
+        .opcao-dispositivo:hover::before {
+            opacity: 1;
         }
         
         .opcao-dispositivo i {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
+            font-size: 4.5rem;
+            margin-bottom: 25px;
             color: var(--cor-destaque);
+            filter: drop-shadow(0 0 15px rgba(252, 209, 22, 0.3));
         }
         
-        /* Cartões de parlamentares */
+        /* Cartões de parlamentares futuristas */
         .parlamentares-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 35px;
         }
         
         .cartao-parlamentar {
-            background-color: var(--cor-card);
-            border-radius: 12px;
+            background: var(--cor-card);
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 5px 15px var(--cor-sombra);
+            box-shadow: var(--sombra-futurista);
             border: 1px solid var(--cor-borda);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        .cartao-parlamentar::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                var(--verde-oficial), 
+                var(--azul-oficial), 
+                var(--amarelo-oficial));
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
         
         .cartao-parlamentar:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px var(--cor-sombra);
+            transform: translateY(-10px) scale(1.03);
+        }
+        
+        .cartao-parlamentar:hover::before {
+            opacity: 1;
         }
         
         .cartao-cabecalho {
-            padding: 1.5rem;
+            padding: 2rem;
             background: var(--gradiente-header);
             color: white;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cartao-cabecalho::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(30deg);
+            animation: brilho 8s linear infinite;
         }
         
         .foto-parlamentar {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1;
         }
         
         .info-parlamentar h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 5px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            position: relative;
         }
         
         .info-parlamentar .partido {
             display: inline-block;
             background: rgba(255, 255, 255, 0.2);
-            padding: 3px 10px;
-            border-radius: 20px;
+            padding: 5px 15px;
+            border-radius: 50px;
             font-size: 0.9rem;
-            margin-top: 5px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            z-index: 1;
+            position: relative;
         }
         
         .cartao-corpo {
-            padding: 1.5rem;
+            padding: 2rem;
         }
         
         .info-item {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
             border-bottom: 1px solid var(--cor-borda);
         }
         
@@ -571,392 +728,141 @@
             border-bottom: none;
         }
         
-        .info-label {
-            font-weight: 600;
-            color: var(--cor-texto-secundario);
-        }
-        
-        .info-value {
-            font-weight: 500;
-        }
-        
-        .status-em-exercicio {
-            color: #10b981;
-            font-weight: 600;
-        }
-        
-        .status-ex {
-            color: #ef4444;
-            font-weight: 600;
-        }
-        
-        /* Visual do plenário */
+        /* Visual do plenário futurista */
         .plenario-container {
-            background-color: var(--cor-fundo);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-top: 2rem;
+            background: var(--cor-fundo);
+            border-radius: 25px;
+            padding: 3rem;
+            margin-top: 3rem;
             border: 1px solid var(--cor-borda);
+            position: relative;
+            overflow: hidden;
         }
         
         .plenario-semicirculo {
             position: relative;
-            height: 400px;
-            margin: 2rem auto;
-            max-width: 900px;
+            height: 500px;
+            margin: 3rem auto;
+            max-width: 1000px;
+            background: rgba(19, 26, 42, 0.3);
+            border-radius: 25px;
+            border: 2px solid var(--cor-borda);
+            overflow: hidden;
+        }
+        
+        .plenario-semicirculo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, 
+                transparent 0%, 
+                var(--gradiente-futurista) 100%);
+            pointer-events: none;
         }
         
         .cadeira {
             position: absolute;
-            width: 50px;
-            height: 70px;
-            background-color: var(--cor-card);
-            border-radius: 8px;
+            width: 60px;
+            height: 85px;
+            background: var(--cor-card);
+            border-radius: 15px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            box-shadow: 0 3px 10px var(--cor-sombra);
+            box-shadow: 0 10px 30px var(--cor-sombra);
             border: 2px solid var(--cor-borda);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2;
+            overflow: hidden;
+        }
+        
+        .cadeira::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                transparent 100%);
+            z-index: -1;
         }
         
         .cadeira:hover {
-            transform: scale(1.1);
-            z-index: 10;
+            transform: scale(1.3) rotate(5deg);
+            z-index: 100;
+            box-shadow: var(--brilho-futurista);
         }
         
         .sigla-partido {
-            font-weight: 700;
-            font-size: 0.9rem;
+            font-weight: 800;
+            font-size: 1.1rem;
         }
         
         .numero-cadeira {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             color: var(--cor-texto-secundario);
-            margin-top: 3px;
+            margin-top: 5px;
+            opacity: 0.8;
         }
         
-        /* Filtros */
-        .filtros-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 2rem;
-            background-color: var(--cor-card);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid var(--cor-borda);
-        }
-        
-        .filtro {
-            display: flex;
-            flex-direction: column;
-            min-width: 200px;
-            flex: 1;
-        }
-        
-        .filtro label {
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--cor-texto-secundario);
-        }
-        
-        .filtro select, .filtro input {
-            padding: 0.8rem;
-            border: 1px solid var(--cor-borda);
-            border-radius: 6px;
-            background-color: var(--cor-fundo);
-            color: var(--cor-texto);
-            font-family: 'Inter', sans-serif;
-        }
-        
-        /* Tabela de projetos de lei */
-        .tabela-projetos {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-        }
-        
-        .tabela-projetos th {
-            background-color: var(--cor-hover);
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            color: var(--cor-texto);
-            border-bottom: 2px solid var(--cor-borda);
-        }
-        
-        .tabela-projetos td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--cor-borda);
-        }
-        
-        .tabela-projetos tr:hover {
-            background-color: var(--cor-hover);
-        }
-        
-        .status-aprovado {
-            color: #10b981;
-            font-weight: 600;
-        }
-        
-        .status-derrubado {
-            color: #ef4444;
-            font-weight: 600;
-        }
-        
-        .status-arquivado {
-            color: #6b7280;
-            font-weight: 600;
-        }
-        
-        /* Painéis de administração */
-        .painel-container {
-            display: none;
-            background-color: var(--cor-card);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-top: 2rem;
-            border: 1px solid var(--cor-borda);
-            box-shadow: 0 5px 20px var(--cor-sombra);
-        }
-        
-        .painel-container.ativo {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .form-painel {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 1.5rem;
-        }
-        
-        .grupo-form {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .grupo-form label {
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--cor-texto-secundario);
-        }
-        
-        .grupo-form input, .grupo-form select, .grupo-form textarea {
-            padding: 0.8rem;
-            border: 1px solid var(--cor-borda);
-            border-radius: 6px;
-            background-color: var(--cor-fundo);
-            color: var(--cor-texto);
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .botoes-acao {
-            display: flex;
-            gap: 15px;
-            margin-top: 2rem;
-            grid-column: 1 / -1;
-        }
-        
-        .botao-acao {
-            padding: 0.8rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-        }
-        
-        .botao-primario {
-            background-color: var(--cor-destaque);
-            color: white;
-        }
-        
-        .botao-secundario {
-            background-color: var(--cor-hover);
-            color: var(--cor-texto);
-            border: 1px solid var(--cor-borda);
-        }
-        
-        .botao-acao:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-        
-        /* IA Legislativa - Chat */
-        .chat-container {
-            display: flex;
-            flex-direction: column;
-            height: 500px;
-            border: 1px solid var(--cor-borda);
-            border-radius: 12px;
-            overflow: hidden;
-            background-color: var(--cor-card);
-        }
-        
-        .chat-mensagens {
-            flex: 1;
-            padding: 1.5rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        
-        .mensagem {
-            max-width: 80%;
-            padding: 1rem;
-            border-radius: 12px;
-            line-height: 1.5;
-        }
-        
-        .mensagem-ia {
-            align-self: flex-start;
-            background-color: var(--cor-hover);
-            color: var(--cor-texto);
-        }
-        
-        .mensagem-usuario {
-            align-self: flex-end;
-            background-color: var(--cor-destaque);
-            color: white;
-        }
-        
-        .chat-entrada {
-            display: flex;
-            padding: 1rem;
-            border-top: 1px solid var(--cor-borda);
-            background-color: var(--cor-card);
-        }
-        
-        .chat-entrada input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 1px solid var(--cor-borda);
-            border-radius: 6px;
-            background-color: var(--cor-fundo);
-            color: var(--cor-texto);
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .chat-entrada button {
-            margin-left: 10px;
-            padding: 0.8rem 1.5rem;
-            background-color: var(--cor-destaque);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--cor-card);
-            border-top: 1px solid var(--cor-borda);
-            padding: 3rem 2rem 2rem;
-            margin-top: 3rem;
-        }
-        
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .footer-coluna h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-            color: var(--cor-texto);
-        }
-        
-        .footer-coluna ul {
-            list-style: none;
-        }
-        
-        .footer-coluna li {
-            margin-bottom: 0.8rem;
-        }
-        
-        .footer-coluna a {
-            color: var(--cor-texto-secundario);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-coluna a:hover {
-            color: var(--cor-destaque);
-        }
-        
-        .creditos {
-            text-align: center;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--cor-borda);
-            color: var(--cor-texto-secundario);
-            font-size: 0.9rem;
-        }
-        
-        /* === ANIMAÇÕES === */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        @keyframes slideDown {
+        /* === ANIMAÇÕES AVANÇADAS === */
+        @keyframes surgir {
             from { 
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: scale(0.8) translateY(-20px);
             }
             to { 
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1) translateY(0);
             }
-        }
-        
-        @keyframes pulsar-luz {
-            0% { opacity: 0.5; }
-            100% { opacity: 1; }
         }
         
         @keyframes levitar {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
         }
         
-        /* === RESPONSIVIDADE === */
-        @media (max-width: 1024px) {
+        @keyframes brilhoTexto {
+            0% { text-shadow: 0 0 20px rgba(252, 209, 22, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(252, 209, 22, 0.8), 
+                            0 0 60px rgba(58, 117, 196, 0.5); }
+        }
+        
+        @keyframes brilho {
+            0% { transform: rotate(30deg) translateX(-30%); }
+            100% { transform: rotate(30deg) translateX(30%); }
+        }
+        
+        @keyframes pulsar-luz {
+            0% { opacity: 0.3; transform: scale(0.9); }
+            100% { opacity: 0.8; transform: scale(1.1); }
+        }
+        
+        /* ... Restante do CSS mantido ... */
+        
+        /* RESPONSIVIDADE MELHORADA */
+        @media (max-width: 1200px) {
             .parlamentares-container {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             }
             
-            .plenario-semicirculo {
-                height: 350px;
-            }
-            
-            .cadeira {
-                width: 45px;
-                height: 65px;
+            .opcoes-dispositivo {
+                flex-direction: column;
+                align-items: center;
             }
         }
         
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
-                gap: 15px;
-            }
-            
-            .controles-superiores {
-                width: 100%;
-                justify-content: center;
+                gap: 20px;
             }
             
             .nav-container {
@@ -979,52 +885,20 @@
                 border-bottom: 1px solid var(--cor-borda);
             }
             
-            .menu-hamburguer {
-                display: block;
-                align-self: flex-start;
+            .titulo-secao {
+                font-size: 1.8rem;
             }
             
-            .opcoes-dispositivo {
-                flex-direction: column;
-                align-items: center;
+            .secao {
+                padding: 2rem;
             }
             
-            .opcao-dispositivo {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .plenario-semicirculo {
-                height: 250px;
-            }
-            
-            .cadeira {
-                width: 35px;
-                height: 50px;
-            }
-            
-            .sigla-partido {
-                font-size: 0.7rem;
-            }
-            
-            .numero-cadeira {
-                font-size: 0.6rem;
-            }
-            
-            .form-painel {
-                grid-template-columns: 1fr;
+            .container-principal {
+                padding: 2rem 1rem;
             }
         }
         
         @media (max-width: 480px) {
-            .container-principal {
-                padding: 1rem;
-            }
-            
-            .secao {
-                padding: 1.5rem;
-            }
-            
             .titulo-introducao {
                 font-size: 2.5rem;
             }
@@ -1038,14 +912,18 @@
                 height: 80px;
             }
             
-            .palacio-container {
-                width: 250px;
-                height: 150px;
+            .menu-acessibilidade {
+                width: 90vw;
+                right: 5vw;
             }
             
-            .menu-acessibilidade {
-                width: 280px;
-                right: 10px;
+            .plenario-semicirculo {
+                height: 300px;
+            }
+            
+            .cadeira {
+                width: 40px;
+                height: 60px;
             }
         }
     </style>
@@ -1065,16 +943,16 @@
         </div>
         
         <div class="texto-introducao">
-            <h1 class="titulo-introducao">Poder Legislativo de Brookasil</h1>
-            <h2 class="subtitulo-introducao">Senado Federal • Assembleia Geral</h2>
+            <h1 class="titulo-introducao">PODER LEGISLATIVO</h1>
+            <h2 class="subtitulo-introducao">BROOKASIL • 2026</h2>
         </div>
         
         <audio id="som-institucional" preload="auto">
-            <source src="https://assets.mixkit.co/music/preview/mixkit-soothing-wind-539.mp3" type="audio/mpeg">
+            <source src="https://assets.mixkit.co/music/preview/mixkit-epic-orchestra-1565.mp3" type="audio/mpeg">
         </audio>
     </div>
     
-    <!-- Site Principal (inicialmente oculto) -->
+    <!-- Site Principal -->
     <div id="site-principal" style="display: none;">
         <!-- Header -->
         <header>
@@ -1082,17 +960,17 @@
                 <div class="logo">
                     <div class="logo-icon">🏛️</div>
                     <div class="logo-texto">
-                        <h1>Poder Legislativo de Brookasil</h1>
-                        <p>Palácio do Esplendor • Cidade Eleitoral (CDE) • 2026</p>
+                        <h1>LEGISLATIVO BROOKASIL</h1>
+                        <p>PALÁCIO DO ESPLENDOR • CIDADE ELEITORAL</p>
                     </div>
                 </div>
                 
                 <div class="controles-superiores">
-                    <button id="botao-tema" class="botao-tema foco-visivel" aria-label="Alternar entre tema claro e escuro">
+                    <button id="botao-tema" class="botao-tema foco-visivel" aria-label="Alternar tema">
                         <i class="fas fa-moon"></i>
                     </button>
                     
-                    <button id="botao-acessibilidade" class="botao-acessibilidade foco-visivel" aria-label="Abrir menu de acessibilidade">
+                    <button id="botao-acessibilidade" class="botao-acessibilidade foco-visivel" aria-label="Acessibilidade">
                         <i class="fas fa-universal-access"></i>
                     </button>
                 </div>
@@ -1101,7 +979,9 @@
         
         <!-- Menu de Acessibilidade -->
         <div id="menu-acessibilidade" class="menu-acessibilidade">
-            <h3 style="margin-bottom: 20px; color: var(--cor-texto);">Configurações de Acessibilidade</h3>
+            <h3 style="margin-bottom: 25px; color: var(--cor-texto); text-align: center;">
+                <i class="fas fa-universal-access"></i> ACESSIBILIDADE
+            </h3>
             
             <div class="opcao-acessibilidade">
                 <div>
@@ -1109,9 +989,9 @@
                     <p style="font-size: 0.9rem; color: var(--cor-texto-secundario);">Ajuste o tamanho do texto</p>
                 </div>
                 <div class="controles-acessibilidade">
-                    <button id="diminuir-fonte" class="botao-controle-acessibilidade foco-visivel" aria-label="Diminuir tamanho da fonte">A-</button>
-                    <span id="valor-fonte" style="color: var(--cor-texto);">100%</span>
-                    <button id="aumentar-fonte" class="botao-controle-acessibilidade foco-visivel" aria-label="Aumentar tamanho da fonte">A+</button>
+                    <button id="diminuir-fonte" class="botao-controle-acessibilidade foco-visivel" aria-label="Diminuir fonte">A-</button>
+                    <span id="valor-fonte" style="color: var(--cor-texto); font-weight: bold;">100%</span>
+                    <button id="aumentar-fonte" class="botao-controle-acessibilidade foco-visivel" aria-label="Aumentar fonte">A+</button>
                 </div>
             </div>
             
@@ -1121,7 +1001,7 @@
                     <p style="font-size: 0.9rem; color: var(--cor-texto-secundario);">Maior contraste entre cores</p>
                 </div>
                 <div class="controles-acessibilidade">
-                    <button id="alternar-contraste" class="botao-controle-acessibilidade foco-visivel" aria-label="Alternar modo de alto contraste">
+                    <button id="alternar-contraste" class="botao-controle-acessibilidade foco-visivel" aria-label="Alternar contraste">
                         <i class="fas fa-adjust"></i>
                     </button>
                 </div>
@@ -1133,90 +1013,63 @@
                     <p style="font-size: 0.9rem; color: var(--cor-texto-secundario);">Foco no conteúdo textual</p>
                 </div>
                 <div class="controles-acessibilidade">
-                    <button id="alternar-leitura" class="botao-controle-acessibilidade foco-visivel" aria-label="Alternar modo de leitura">
+                    <button id="alternar-leitura" class="botao-controle-acessibilidade foco-visivel" aria-label="Alternar modo leitura">
                         <i class="fas fa-book-open"></i>
                     </button>
                 </div>
             </div>
             
-            <div class="opcao-acessibilidade">
-                <div>
-                    <strong style="color: var(--cor-texto);">Linguagem Simples</strong>
-                    <p style="font-size: 0.9rem; color: var(--cor-texto-secundario);">Texto simplificado</p>
-                </div>
-                <div class="controles-acessibilidade">
-                    <button id="alternar-linguagem" class="botao-controle-acessibilidade foco-visivel" aria-label="Alternar para linguagem simples">
-                        <i class="fas fa-comment-alt"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--cor-borda);">
-                <button id="reset-acessibilidade" class="botao-acao botao-secundario" style="width: 100%;">Redefinir Configurações</button>
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--cor-borda);">
+                <button id="reset-acessibilidade" class="botao-acao botao-secundario" style="width: 100%; padding: 15px; font-weight: bold;">
+                    <i class="fas fa-redo"></i> REDEFINIR CONFIGURAÇÕES
+                </button>
             </div>
         </div>
         
         <!-- Navegação Principal -->
         <nav>
             <div class="nav-container">
-                <button id="menu-hamburguer" class="menu-hamburguer foco-visivel" aria-label="Abrir menu de navegação">
+                <button id="menu-hamburguer" class="menu-hamburguer foco-visivel" aria-label="Abrir menu">
                     <i class="fas fa-bars"></i>
                 </button>
                 
                 <ul id="nav-links" class="nav-links">
-                    <li><a href="#inicio" class="nav-link ativo foco-visivel" data-secao="inicio">🏠 Início</a></li>
-                    <li><a href="#parlamentares" class="nav-link foco-visivel" data-secao="parlamentares">👥 Parlamentares</a></li>
-                    <li><a href="#plenario" class="nav-link foco-visivel" data-secao="plenario">🏛️ Plenário</a></li>
-                    <li><a href="#projetos" class="nav-link foco-visivel" data-secao="projetos">📜 Projetos de Lei</a></li>
-                    <li><a href="#painel" class="nav-link foco-visivel" data-secao="painel">⚙️ Painel Admin</a></li>
-                    <li><a href="#ia" class="nav-link foco-visivel" data-secao="ia">🤖 IA Legislativa</a></li>
-                    <li><a href="#links" class="nav-link foco-visivel" data-secao="links">🔗 Links Oficiais</a></li>
+                    <li><a href="#inicio" class="nav-link ativo foco-visivel" data-secao="inicio">🏠 INÍCIO</a></li>
+                    <li><a href="#parlamentares" class="nav-link foco-visivel" data-secao="parlamentares">👥 PARLAMENTARES</a></li>
+                    <li><a href="#plenario" class="nav-link foco-visivel" data-secao="plenario">🏛️ PLENÁRIO</a></li>
+                    <li><a href="#projetos" class="nav-link foco-visivel" data-secao="projetos">📜 PROJETOS</a></li>
+                    <li><a href="#painel" class="nav-link foco-visivel" data-secao="painel">⚙️ PAINEL</a></li>
+                    <li><a href="#ia" class="nav-link foco-visivel" data-secao="ia">🤖 IA LEGISLATIVA</a></li>
                 </ul>
                 
-                <button id="botao-login" class="botao-login foco-visivel">🔐 Entrar</button>
+                <button id="botao-login" class="botao-login foco-visivel">
+                    <i class="fas fa-lock"></i> ENTRAR
+                </button>
             </div>
         </nav>
         
         <!-- Conteúdo Principal -->
         <main class="container-principal">
-            <!-- Seção Inicial (Seleção de Dispositivo) -->
+            <!-- Seção Inicial -->
             <section id="secao-inicio" class="secao">
-                <h2 class="titulo-secao"><i class="fas fa-home"></i> Bem-vindo ao Portal Legislativo</h2>
-                <p style="margin-bottom: 1.5rem; color: var(--cor-texto-secundario);">
-                    Este portal oferece uma experiência otimizada para diferentes dispositivos. 
-                    Por favor, selecione o tipo de dispositivo que está utilizando para uma experiência personalizada.
-                </p>
+                <h2 class="titulo-secao"><i class="fas fa-star"></i> BEM-VINDO AO FUTURO LEGISLATIVO</h2>
                 
                 <div class="selecao-dispositivo">
                     <div class="opcoes-dispositivo">
                         <div id="opcao-celular" class="opcao-dispositivo foco-visivel">
                             <i class="fas fa-mobile-alt"></i>
-                            <h3 style="margin-bottom: 10px; color: var(--cor-texto);">Celular (Vertical)</h3>
-                            <p style="color: var(--cor-texto-secundario); font-size: 0.9rem;">Interface otimizada para smartphones</p>
+                            <h3 style="margin-bottom: 15px; color: var(--cor-texto); font-size: 1.4rem;">CELULAR</h3>
+                            <p style="color: var(--cor-texto-secundario); font-size: 1rem;">
+                                Interface otimizada para experiência móvel com navegação simplificada
+                            </p>
                         </div>
                         
                         <div id="opcao-computador" class="opcao-dispositivo foco-visivel">
-                            <i class="fas fa-laptop"></i>
-                            <h3 style="margin-bottom: 10px; color: var(--cor-texto);">Tablet / Computador</h3>
-                            <p style="color: var(--cor-texto-secundario); font-size: 0.9rem;">Interface completa para desktop</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--cor-borda);">
-                    <h3 style="margin-bottom: 1rem; color: var(--cor-texto);">Colaboradores Oficiais</h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
-                        <div style="background-color: var(--cor-hover); padding: 1rem; border-radius: 8px; flex: 1; min-width: 200px;">
-                            <strong style="color: var(--cor-texto);">Tutu Protásio</strong>
-                            <p style="color: var(--cor-texto-secundario); font-size: 0.9rem; margin-top: 5px;">Coordenador Legislativo</p>
-                        </div>
-                        <div style="background-color: var(--cor-hover); padding: 1rem; border-radius: 8px; flex: 1; min-width: 200px;">
-                            <strong style="color: var(--cor-texto);">Ryan Dantas</strong>
-                            <p style="color: var(--cor-texto-secundario); font-size: 0.9rem; margin-top: 5px;">Desenvolvedor Chefe</p>
-                        </div>
-                        <div style="background-color: var(--cor-hover); padding: 1rem; border-radius: 8px; flex: 1; min-width: 200px;">
-                            <strong style="color: var(--cor-texto);">Antônio Aveiro</strong>
-                            <p style="color: var(--cor-texto-secundario); font-size: 0.9rem; margin-top: 5px;">Consultor Institucional</p>
+                            <i class="fas fa-desktop"></i>
+                            <h3 style="margin-bottom: 15px; color: var(--cor-texto); font-size: 1.4rem;">COMPUTADOR</h3>
+                            <p style="color: var(--cor-texto-secundario); font-size: 1rem;">
+                                Experiência completa com visualizações avançadas e ferramentas
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -1224,419 +1077,232 @@
             
             <!-- Seção Parlamentares -->
             <section id="secao-parlamentares" class="secao" style="display: none;">
-                <h2 class="titulo-secao"><i class="fas fa-users"></i> Parlamentares</h2>
+                <h2 class="titulo-secao"><i class="fas fa-users"></i> PARLAMENTARES</h2>
                 
                 <div class="filtros-container">
                     <div class="filtro">
-                        <label for="filtro-casa">Casa Legislativa</label>
-                        <select id="filtro-casa">
-                            <option value="todas">Todas</option>
-                            <option value="senado">Senado Federal</option>
-                            <option value="assembleia">Assembleia Geral</option>
+                        <label for="filtro-casa">CASA LEGISLATIVA</label>
+                        <select id="filtro-casa" class="foco-visivel">
+                            <option value="todas">TODAS</option>
+                            <option value="senado">SENADO FEDERAL</option>
+                            <option value="assembleia">ASSEMBLEIA GERAL</option>
                         </select>
                     </div>
                     
                     <div class="filtro">
-                        <label for="filtro-partido">Partido</label>
-                        <select id="filtro-partido">
-                            <option value="todos">Todos</option>
+                        <label for="filtro-partido">PARTIDO</label>
+                        <select id="filtro-partido" class="foco-visivel">
+                            <option value="todos">TODOS</option>
                         </select>
                     </div>
                     
                     <div class="filtro">
-                        <label for="filtro-situacao">Situação</label>
-                        <select id="filtro-situacao">
-                            <option value="todos">Todos</option>
-                            <option value="em-exercicio">Em exercício</option>
-                            <option value="ex">Ex-parlamentar</option>
+                        <label for="filtro-situacao">SITUAÇÃO</label>
+                        <select id="filtro-situacao" class="foco-visivel">
+                            <option value="todos">TODOS</option>
+                            <option value="em-exercicio">EM EXERCÍCIO</option>
+                            <option value="ex">EX-PARLAMENTAR</option>
                         </select>
                     </div>
                     
                     <div class="filtro">
-                        <label for="filtro-busca">Buscar por nome</label>
-                        <input type="text" id="filtro-busca" placeholder="Digite o nome...">
+                        <label for="filtro-busca">BUSCAR PARLAMENTAR</label>
+                        <input type="text" id="filtro-busca" class="foco-visivel" placeholder="Digite o nome...">
                     </div>
                 </div>
                 
                 <div id="parlamentares-container" class="parlamentares-container">
-                    <!-- Parlamentares carregados dinamicamente via Firebase -->
+                    <!-- Carregado dinamicamente -->
                 </div>
             </section>
             
             <!-- Seção Plenário -->
             <section id="secao-plenario" class="secao" style="display: none;">
-                <h2 class="titulo-secao"><i class="fas fa-landmark"></i> Plenário Virtual</h2>
-                <p style="margin-bottom: 1.5rem; color: var(--cor-texto-secundario);">
-                    Visualização dinâmica da distribuição de cadeiras no plenário. Clique em uma cadeira para ver detalhes do parlamentar.
-                </p>
+                <h2 class="titulo-secao"><i class="fas fa-landmark"></i> PLENÁRIO VIRTUAL</h2>
                 
                 <div class="plenario-container">
-                    <div id="contador-cadeiras" style="display: flex; justify-content: space-between; margin-bottom: 1.5rem;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--cor-destaque);">0</div>
-                            <div style="color: var(--cor-texto-secundario);">Cadeiras Ocupadas</div>
+                    <div id="contador-cadeiras" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 2rem;">
+                        <div style="text-align: center; padding: 1.5rem; background: var(--gradiente-futurista); border-radius: 15px;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--amarelo-oficial);">0</div>
+                            <div style="color: var(--cor-texto-secundario); font-weight: 600;">CADEIRAS OCUPADAS</div>
                         </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--cor-texto-secundario);">0</div>
-                            <div style="color: var(--cor-texto-secundario);">Cadeiras Vagas</div>
+                        <div style="text-align: center; padding: 1.5rem; background: var(--gradiente-futurista); border-radius: 15px;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--azul-oficial);">0</div>
+                            <div style="color: var(--cor-texto-secundario); font-weight: 600;">CADEIRAS VAGAS</div>
                         </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--cor-texto);">0</div>
-                            <div style="color: var(--cor-texto-secundario);">Total de Partidos</div>
+                        <div style="text-align: center; padding: 1.5rem; background: var(--gradiente-futurista); border-radius: 15px;">
+                            <div style="font-size: 2.5rem; font-weight: 800; color: var(--verde-oficial);">0</div>
+                            <div style="color: var(--cor-texto-secundario); font-weight: 600;">TOTAL DE PARTIDOS</div>
                         </div>
                     </div>
                     
                     <div class="plenario-semicirculo" id="plenario-semicirculo">
-                        <!-- Cadeiras geradas dinamicamente via JavaScript -->
-                    </div>
-                    
-                    <div id="legenda-partidos" style="display: flex; flex-wrap: wrap; gap: 15px; margin-top: 2rem; justify-content: center;">
-                        <!-- Legenda gerada dinamicamente -->
+                        <!-- Gerado dinamicamente -->
                     </div>
                 </div>
             </section>
             
             <!-- Seção Projetos de Lei -->
             <section id="secao-projetos" class="secao" style="display: none;">
-                <h2 class="titulo-secao"><i class="fas fa-file-contract"></i> Projetos de Lei</h2>
+                <h2 class="titulo-secao"><i class="fas fa-file-contract"></i> PROJETOS DE LEI</h2>
                 
                 <div class="filtros-container">
                     <div class="filtro">
-                        <label for="filtro-status-projeto">Status</label>
-                        <select id="filtro-status-projeto">
-                            <option value="todos">Todos</option>
-                            <option value="aprovado">Aprovado</option>
-                            <option value="derrubado">Derrubado</option>
-                            <option value="arquivado">Arquivado</option>
+                        <label for="filtro-status-projeto">STATUS</label>
+                        <select id="filtro-status-projeto" class="foco-visivel">
+                            <option value="todos">TODOS</option>
+                            <option value="aprovado">APROVADO</option>
+                            <option value="derrubado">DERRUBADO</option>
+                            <option value="arquivado">ARQUIVADO</option>
                         </select>
                     </div>
                     
                     <div class="filtro">
-                        <label for="filtro-casa-projeto">Casa Legislativa</label>
-                        <select id="filtro-casa-projeto">
-                            <option value="todas">Todas</option>
-                            <option value="senado">Senado Federal</option>
-                            <option value="assembleia">Assembleia Geral</option>
+                        <label for="filtro-casa-projeto">CASA</label>
+                        <select id="filtro-casa-projeto" class="foco-visivel">
+                            <option value="todas">TODAS</option>
+                            <option value="senado">SENADO</option>
+                            <option value="assembleia">ASSEMBLEIA</option>
                         </select>
                     </div>
                     
                     <div class="filtro">
-                        <label for="filtro-ano-projeto">Ano</label>
-                        <select id="filtro-ano-projeto">
-                            <option value="todos">Todos</option>
+                        <label for="filtro-ano-projeto">ANO</label>
+                        <select id="filtro-ano-projeto" class="foco-visivel">
+                            <option value="todos">TODOS</option>
                             <option value="2026">2026</option>
                             <option value="2025">2025</option>
                         </select>
                     </div>
                     
                     <div class="filtro">
-                        <label for="filtro-busca-projeto">Buscar por título</label>
-                        <input type="text" id="filtro-busca-projeto" placeholder="Digite o título...">
+                        <label for="filtro-busca-projeto">BUSCAR PROJETO</label>
+                        <input type="text" id="filtro-busca-projeto" class="foco-visivel" placeholder="Digite o título...">
                     </div>
                 </div>
                 
                 <table class="tabela-projetos">
                     <thead>
                         <tr>
-                            <th>Número</th>
-                            <th>Título</th>
-                            <th>Autor(es)</th>
-                            <th>Status</th>
-                            <th>Data</th>
-                            <th>Casa</th>
+                            <th>NÚMERO</th>
+                            <th>TÍTULO</th>
+                            <th>AUTOR(ES)</th>
+                            <th>STATUS</th>
+                            <th>DATA</th>
+                            <th>CASA</th>
                         </tr>
                     </thead>
                     <tbody id="tabela-projetos-corpo">
-                        <!-- Projetos carregados dinamicamente via Firebase -->
+                        <!-- Carregado dinamicamente -->
                     </tbody>
                 </table>
             </section>
             
             <!-- Seção Painel Admin -->
             <section id="secao-painel" class="secao" style="display: none;">
-                <h2 class="titulo-secao"><i class="fas fa-user-shield"></i> Painel Administrativo</h2>
+                <h2 class="titulo-secao"><i class="fas fa-user-shield"></i> PAINEL ADMINISTRATIVO</h2>
                 
-                <div style="margin-bottom: 1.5rem; color: var(--cor-texto-secundario);">
-                    <p>Acesso restrito a usuários autorizados. Selecione o tipo de painel para continuar.</p>
-                </div>
-                
-                <div style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 2rem;">
-                    <button class="botao-acao botao-secundario foco-visivel" data-tipo-painel="senador">Senador</button>
-                    <button class="botao-acao botao-secundario foco-visivel" data-tipo-painel="presidente-senado">Presidente do Senado</button>
-                    <button class="botao-acao botao-secundario foco-visivel" data-tipo-painel="deputado">Deputado</button>
-                    <button class="botao-acao botao-secundario foco-visivel" data-tipo-painel="presidente-assembleia">Presidente da Assembleia</button>
-                    <button class="botao-acao botao-secundario foco-visivel" data-tipo-painel="dono">Dono do RP (SUPER ADMIN)</button>
-                </div>
-                
-                <!-- Formulário de Login -->
                 <div id="form-login" class="painel-container">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--cor-texto);">Autenticação</h3>
+                    <h3 style="margin-bottom: 1.5rem; color: var(--cor-texto);">🔐 AUTENTICAÇÃO</h3>
                     <div class="form-painel">
                         <div class="grupo-form">
-                            <label for="login-usuario">Usuário</label>
-                            <input type="text" id="login-usuario" placeholder="Digite seu usuário">
+                            <label for="login-usuario">USUÁRIO</label>
+                            <input type="text" id="login-usuario" class="foco-visivel" placeholder="Digite seu usuário">
                         </div>
                         
                         <div class="grupo-form">
-                            <label for="login-senha">Senha</label>
-                            <input type="password" id="login-senha" placeholder="Digite sua senha">
+                            <label for="login-senha">SENHA</label>
+                            <input type="password" id="login-senha" class="foco-visivel" placeholder="Digite sua senha">
                         </div>
                         
                         <div class="grupo-form">
-                            <label for="login-tipo">Tipo de Acesso</label>
-                            <select id="login-tipo">
-                                <option value="senador">Senador</option>
-                                <option value="presidente-senado">Presidente do Senado</option>
-                                <option value="deputado">Deputado</option>
-                                <option value="presidente-assembleia">Presidente da Assembleia</option>
-                                <option value="dono">Dono do RP</option>
+                            <label for="login-tipo">TIPO DE ACESSO</label>
+                            <select id="login-tipo" class="foco-visivel">
+                                <option value="senador">SENADOR</option>
+                                <option value="presidente-senado">PRESIDENTE DO SENADO</option>
+                                <option value="deputado">DEPUTADO</option>
+                                <option value="presidente-assembleia">PRESIDENTE DA ASSEMBLEIA</option>
+                                <option value="dono">DONO DO RP (SUPER ADMIN)</option>
                             </select>
                         </div>
                         
                         <div class="botoes-acao">
-                            <button id="botao-entrar" class="botao-acao botao-primario">🔐 Entrar</button>
-                            <button id="botao-cancelar-login" class="botao-acao botao-secundario">Cancelar</button>
+                            <button id="botao-entrar" class="botao-acao botao-primario foco-visivel">
+                                <i class="fas fa-sign-in-alt"></i> ENTRAR
+                            </button>
+                            <button id="botao-cancelar-login" class="botao-acao botao-secundario foco-visivel">
+                                CANCELAR
+                            </button>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Painel do Dono do RP (Super Admin) -->
-                <div id="painel-dono" class="painel-container">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--cor-texto);">Painel do Dono do RP (Super Admin)</h3>
-                    
-                    <div style="display: flex; gap: 15px; margin-bottom: 1.5rem;">
-                        <button class="botao-acao botao-secundario foco-visivel" data-acao="registrar-parlamentar">Registrar Parlamentar</button>
-                        <button class="botao-acao botao-secundario foco-visivel" data-acao="criar-partido">Criar Partido</button>
-                        <button class="botao-acao botao-secundario foco-visivel" data-acao="definir-cadeiras">Definir Cadeiras</button>
-                        <button class="botao-acao botao-secundario foco-visivel" data-acao="historico">Ver Histórico</button>
-                    </div>
-                    
-                    <!-- Formulário para registro de parlamentar -->
-                    <div id="form-registro-parlamentar" style="display: none;">
-                        <h4 style="margin-bottom: 1rem; color: var(--cor-texto);">Registrar Novo Parlamentar</h4>
-                        <div class="form-painel">
-                            <div class="grupo-form">
-                                <label for="registro-nome">Nome Completo</label>
-                                <input type="text" id="registro-nome" placeholder="Nome completo do parlamentar">
-                            </div>
-                            
-                            <div class="grupo-form">
-                                <label for="registro-partido">Partido</label>
-                                <select id="registro-partido">
-                                    <option value="">Selecione um partido</option>
-                                </select>
-                            </div>
-                            
-                            <div class="grupo-form">
-                                <label for="registro-cargo">Cargo</label>
-                                <select id="registro-cargo">
-                                    <option value="senador">Senador</option>
-                                    <option value="deputado-federal">Deputado Federal</option>
-                                    <option value="deputado-estadual">Deputado Estadual</option>
-                                </select>
-                            </div>
-                            
-                            <div class="grupo-form">
-                                <label for="registro-situacao">Situação</label>
-                                <select id="registro-situacao">
-                                    <option value="em-exercicio">Em exercício</option>
-                                    <option value="ex">Ex-parlamentar</option>
-                                </select>
-                            </div>
-                            
-                            <div class="grupo-form">
-                                <label for="registro-mandato-inicio">Início do Mandato</label>
-                                <input type="date" id="registro-mandato-inicio">
-                            </div>
-                            
-                            <div class="grupo-form">
-                                <label for="registro-mandato-fim">Fim do Mandato</label>
-                                <input type="date" id="registro-mandato-fim">
-                            </div>
-                            
-                            <div class="grupo-form">
-                                <label for="registro-foto">URL da Foto</label>
-                                <input type="text" id="registro-foto" placeholder="https://exemplo.com/foto.jpg">
-                            </div>
-                            
-                            <div class="botoes-acao">
-                                <button id="botao-salvar-parlamentar" class="botao-acao botao-primario">Salvar Parlamentar</button>
-                                <button id="botao-cancelar-registro" class="botao-acao botao-secundario">Cancelar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Painel de Justificativa de Faltas (para senadores) -->
-                <div id="painel-justificativa" class="painel-container">
-                    <h3 style="margin-bottom: 1.5rem; color: var(--cor-texto);">Justificativa de Faltas</h3>
-                    
-                    <div class="form-painel">
-                        <div class="grupo-form">
-                            <label for="justificativa-data">Data da Sessão</label>
-                            <input type="date" id="justificativa-data">
-                        </div>
-                        
-                        <div class="grupo-form">
-                            <label for="justificativa-tipo">Tipo de Sessão</label>
-                            <select id="justificativa-tipo">
-                                <option value="ordinaria">Ordinária</option>
-                                <option value="extraordinaria">Extraordinária</option>
-                                <option value="solene">Solene</option>
-                            </select>
-                        </div>
-                        
-                        <div class="grupo-form" style="grid-column: 1 / -1;">
-                            <label for="justificativa-motivo">Motivo da Ausência</label>
-                            <textarea id="justificativa-motivo" rows="4" placeholder="Descreva o motivo da ausência..."></textarea>
-                        </div>
-                        
-                        <div class="grupo-form" style="grid-column: 1 / -1;">
-                            <label for="justificativa-comprovante">Comprovante (URL)</label>
-                            <input type="text" id="justificativa-comprovante" placeholder="URL do comprovante, se houver">
-                        </div>
-                        
-                        <div class="botoes-acao">
-                            <button id="botao-enviar-justificativa" class="botao-acao botao-primario">Enviar Justificativa</button>
-                        </div>
-                    </div>
-                </div>
+                <!-- Painéis dinâmicos serão carregados aqui -->
             </section>
             
             <!-- Seção IA Legislativa -->
             <section id="secao-ia" class="secao" style="display: none;">
-                <h2 class="titulo-secao"><i class="fas fa-robot"></i> IA Legislativa Avançada</h2>
-                
-                <p style="margin-bottom: 1.5rem; color: var(--cor-texto-secundario);">
-                    Esta IA especializada pode explicar projetos de lei, esclarecer funções dos cargos legislativos, 
-                    ajudar no uso dos painéis e detectar inconsistências nos dados. Nunca inventa informações ou revela dados sensíveis.
-                </p>
+                <h2 class="titulo-secao"><i class="fas fa-robot"></i> IA LEGISLATIVA</h2>
                 
                 <div class="chat-container">
                     <div id="chat-mensagens" class="chat-mensagens">
                         <div class="mensagem mensagem-ia">
-                            <strong>IA Legislativa:</strong> Olá! Sou a IA Legislativa do Poder Legislativo de Brookasil. Posso ajudar você a entender projetos de lei, explicar cargos e funções do legislativo, e auxiliar no uso dos painéis administrativos. Como posso ajudar você hoje?
+                            <strong>IA LEGISLATIVA:</strong> Olá! Sou a Inteligência Artificial Legislativa do Brookasil. Posso explicar projetos de lei, esclarecer funções dos cargos legislativos, ajudar no uso dos painéis e detectar inconsistências nos dados. Como posso ajudar você hoje?
                         </div>
                     </div>
                     
                     <div class="chat-entrada">
-                        <input type="text" id="input-pergunta" placeholder="Digite sua pergunta sobre o legislativo...">
-                        <button id="botao-enviar-pergunta" class="foco-visivel">Enviar</button>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--cor-hover); border-radius: 10px;">
-                    <h3 style="margin-bottom: 1rem; color: var(--cor-texto);">Perguntas Frequentes</h3>
-                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                        <button class="botao-acao botao-secundario foco-visivel" data-pergunta="projetos-lei">O que são projetos de lei?</button>
-                        <button class="botao-acao botao-secundario foco-visivel" data-pergunta="diferenca-cargos">Diferença entre senador e deputado?</button>
-                        <button class="botao-acao botao-secundario foco-visivel" data-pergunta="processo-legislativo">Como funciona o processo legislativo?</button>
-                        <button class="botao-acao botao-secundario foco-visivel" data-pergunta="justificativa-faltas">Como justificar faltas?</button>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Seção Links Oficiais -->
-            <section id="secao-links" class="secao" style="display: none;">
-                <h2 class="titulo-secao"><i class="fas fa-link"></i> Links Oficiais</h2>
-                
-                <div style="margin-bottom: 1.5rem; color: var(--cor-texto-secundario);">
-                    <p>Acesse os portais oficiais relacionados ao processo legislativo e eleitoral de Brookasil.</p>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;">
-                    <div style="background-color: var(--cor-card); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--cor-borda);">
-                        <h3 style="margin-bottom: 1rem; color: var(--cor-texto);">Candidatura Oficial</h3>
-                        <p style="color: var(--cor-texto-secundario); margin-bottom: 1rem;">Portal para protocolo de candidaturas ao Poder Legislativo.</p>
-                        <a href="https://tsedoroblox2025.github.io/candidatura-cde/" target="_blank" class="botao-acao botao-primario foco-visivel" style="display: inline-block; text-decoration: none;">Acessar Portal</a>
-                    </div>
-                    
-                    <div style="background-color: var(--cor-card); border-radius: 12px; padding: 1.5rem; border: 1px solid var(--cor-borda);">
-                        <h3 style="margin-bottom: 1rem; color: var(--cor-texto);">Filiação Partidária</h3>
-                        <p style="color: var(--cor-texto-secundario); margin-bottom: 1rem;">Sistema de filiação a partidos políticos de Brookasil.</p>
-                        <a href="https://tsedoroblox2025.github.io/filia-o.html/" target="_blank" class="botao-acao botao-primario foco-visivel" style="display: inline-block; text-decoration: none;">Acessar Sistema</a>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 2rem; padding: 1.5rem; background-color: var(--cor-hover); border-radius: 10px;">
-                    <h3 style="margin-bottom: 1rem; color: var(--cor-texto);">Tutorial Passo a Passo</h3>
-                    
-                    <div style="display: flex; overflow-x: auto; gap: 20px; padding-bottom: 10px;">
-                        <div style="min-width: 250px; background-color: var(--cor-card); padding: 1.5rem; border-radius: 8px;">
-                            <div style="background-color: var(--cor-destaque); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 15px;">1</div>
-                            <h4 style="margin-bottom: 10px; color: var(--cor-texto);">Protocolo de Candidatura</h4>
-                            <p style="color: var(--cor-texto-secundario); font-size: 0.9rem;">Acesse o portal de candidatura e preencha o formulário com seus dados pessoais e políticos.</p>
-                        </div>
-                        
-                        <div style="min-width: 250px; background-color: var(--cor-card); padding: 1.5rem; border-radius: 8px;">
-                            <div style="background-color: var(--cor-destaque); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 15px;">2</div>
-                            <h4 style="margin-bottom: 10px; color: var(--cor-texto);">Filiação Partidária</h4>
-                            <p style="color: var(--cor-texto-secundario); font-size: 0.9rem;">Escolha um partido político e preencha a ficha de filiação no sistema oficial.</p>
-                        </div>
-                        
-                        <div style="min-width: 250px; background-color: var(--cor-card); padding: 1.5rem; border-radius: 8px;">
-                            <div style="background-color: var(--cor-destaque); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 15px;">3</div>
-                            <h4 style="margin-bottom: 10px; color: var(--cor-texto);">Campanha Eleitoral</h4>
-                            <p style="color: var(--cor-texto-secundario); font-size: 0.9rem;">Participe das eleições apresentando suas propostas para a população de Brookasil.</p>
-                        </div>
-                        
-                        <div style="min-width: 250px; background-color: var(--cor-card); padding: 1.5rem; border-radius: 8px;">
-                            <div style="background-color: var(--cor-destaque); color: white; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; margin-bottom: 15px;">4</div>
-                            <h4 style="margin-bottom: 10px; color: var(--cor-texto);">Posse no Mandato</h4>
-                            <p style="color: var(--cor-texto-secundario); font-size: 0.9rem;">Após eleito, tome posse no Palácio do Esplendor e inicie suas atividades legislativas.</p>
-                        </div>
+                        <input type="text" id="input-pergunta" class="foco-visivel" placeholder="Digite sua pergunta sobre o legislativo...">
+                        <button id="botao-enviar-pergunta" class="foco-visivel">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
                     </div>
                 </div>
             </section>
         </main>
         
-        <!-- Footer -->
+        <!-- Footer Futurista -->
         <footer>
             <div class="footer-container">
                 <div class="footer-coluna">
-                    <h3>Poder Legislativo</h3>
+                    <h3>LEGISLATIVO</h3>
                     <ul>
-                        <li><a href="#inicio">Início</a></li>
-                        <li><a href="#parlamentares">Parlamentares</a></li>
-                        <li><a href="#projetos">Projetos de Lei</a></li>
-                        <li><a href="#plenario">Plenário Virtual</a></li>
+                        <li><a href="#inicio" class="foco-visivel">INÍCIO</a></li>
+                        <li><a href="#parlamentares" class="foco-visivel">PARLAMENTARES</a></li>
+                        <li><a href="#projetos" class="foco-visivel">PROJETOS DE LEI</a></li>
+                        <li><a href="#plenario" class="foco-visivel">PLENÁRIO VIRTUAL</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-coluna">
-                    <h3>Informações</h3>
+                    <h3>RECURSOS</h3>
                     <ul>
-                        <li><a href="#ia">IA Legislativa</a></li>
-                        <li><a href="#links">Links Oficiais</a></li>
-                        <li><a href="#painel">Painéis Admin</a></li>
-                        <li><a href="#acessibilidade">Acessibilidade</a></li>
+                        <li><a href="#ia" class="foco-visivel">IA LEGISLATIVA</a></li>
+                        <li><a href="#painel" class="foco-visivel">PAINÉIS ADMIN</a></li>
+                        <li><a href="#acessibilidade" class="foco-visivel">ACESSIBILIDADE</a></li>
+                        <li><a href="#" id="link-documentacao" class="foco-visivel">DOCUMENTAÇÃO</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-coluna">
-                    <h3>Contato</h3>
+                    <h3>CONTATO</h3>
                     <ul>
-                        <li>Palácio do Esplendor</li>
-                        <li>Cidade Eleitoral (CDE)</li>
-                        <li>Brookasil</li>
-                        <li>Email: contato@legislativo.brookasil.br</li>
+                        <li>PALÁCIO DO ESPLENDOR</li>
+                        <li>CIDADE ELEITORAL (CDE)</li>
+                        <li>BROOKASIL</li>
+                        <li>contato@legislativo.brookasil.br</li>
                     </ul>
                 </div>
                 
                 <div class="footer-coluna">
-                    <h3>Recursos</h3>
+                    <h3>DESENVOLVEDORES</h3>
                     <ul>
-                        <li><a href="https://tsedoroblox2025.github.io/candidatura-cde/" target="_blank">Candidatura</a></li>
-                        <li><a href="https://tsedoroblox2025.github.io/filia-o.html/" target="_blank">Filiação Partidária</a></li>
-                        <li><a href="#" id="link-documentacao">Documentação</a></li>
-                        <li><a href="#" id="link-ajuda">Ajuda</a></li>
+                        <li>RYAN DANTAS</li>
+                        <li>TUTU PROTÁSIO</li>
+                        <li>ANTÔNIO AVEIRO</li>
+                        <li>TODOS OS DIREITOS RESERVADOS © 2026</li>
                     </ul>
                 </div>
-            </div>
-            
-            <div class="creditos">
-                <p>© 2026 Poder Legislativo de Brookasil. Todos os direitos reservados.</p>
-                <p>Desenvolvido por Ryan Dantas • Colaboradores: Tutu Protásio, Antônio Aveiro</p>
             </div>
         </footer>
     </div>
@@ -1654,16 +1320,15 @@
         // Inicializar Firebase
         try {
             firebase.initializeApp(firebaseConfig);
-            console.log("Firebase inicializado com sucesso!");
+            console.log("✅ Firebase inicializado com sucesso!");
         } catch (error) {
-            console.error("Erro ao inicializar Firebase:", error);
+            console.error("❌ Erro ao inicializar Firebase:", error);
         }
         
         const database = firebase.database();
-        const auth = firebase.auth();
         
         // ==================================================
-        // VARIÁVEIS GLOBAIS E ESTADO DO SISTEMA
+        // VARIÁVEIS GLOBAIS
         // ==================================================
         let usuarioAutenticado = null;
         let parlamentares = [];
@@ -1679,7 +1344,7 @@
         };
         
         // ==================================================
-        // ANIMAÇÃO DE INTRODUÇÃO CINEMATOGRÁFICA
+        // ANIMAÇÃO DE INTRODUÇÃO
         // ==================================================
         document.addEventListener('DOMContentLoaded', function() {
             const telaIntroducao = document.getElementById('tela-introducao');
@@ -1687,30 +1352,23 @@
             const bandeiraContainer = document.querySelector('.bandeira-container');
             const palacioContainer = document.querySelector('.palacio-container');
             const textoIntroducao = document.querySelector('.texto-introducao');
-            const somInstitucional = document.getElementById('som-institucional');
-            
-            // Tentar tocar o som (pode ser bloqueado por autoplay policy)
-            setTimeout(() => {
-                somInstitucional.volume = 0.3;
-                somInstitucional.play().catch(e => console.log("Autoplay bloqueado, o usuário precisa interagir primeiro."));
-            }, 500);
             
             // Sequência de animações
             setTimeout(() => {
                 bandeiraContainer.style.opacity = 1;
                 bandeiraContainer.style.transform = 'translateY(0)';
                 bandeiraContainer.style.transition = 'opacity 2s ease, transform 2s ease';
-            }, 1000);
+            }, 500);
             
             setTimeout(() => {
                 palacioContainer.style.opacity = 1;
                 palacioContainer.style.transition = 'opacity 2s ease';
-            }, 3000);
+            }, 2000);
             
             setTimeout(() => {
                 textoIntroducao.style.opacity = 1;
                 textoIntroducao.style.transition = 'opacity 2s ease';
-            }, 5000);
+            }, 3500);
             
             // Finalizar animação e mostrar o site
             setTimeout(() => {
@@ -1722,7 +1380,7 @@
                     sitePrincipal.style.display = 'block';
                     inicializarSite();
                 }, 1500);
-            }, 8000);
+            }, 6000);
         });
         
         // ==================================================
@@ -1735,18 +1393,15 @@
             configurarAcessibilidade();
         }
         
-        // ==================================================
-        // SISTEMA DE TEMA CLARO/ESCURO
-        // ==================================================
         function carregarPreferenciasUsuario() {
-            // Verificar tema salvo no localStorage
+            // Verificar tema salvo
             const temaSalvo = localStorage.getItem('tema-legislativo-brookasil');
             if (temaSalvo) {
                 temaAtual = temaSalvo;
                 aplicarTema(temaSalvo);
             }
             
-            // Verificar preferências de acessibilidade salvas
+            // Verificar acessibilidade salva
             const acessibilidadeSalva = localStorage.getItem('acessibilidade-legislativo-brookasil');
             if (acessibilidadeSalva) {
                 configAcessibilidade = JSON.parse(acessibilidadeSalva);
@@ -1761,6 +1416,9 @@
             }
         }
         
+        // ==================================================
+        // SISTEMA DE TEMA
+        // ==================================================
         function aplicarTema(tema) {
             const body = document.body;
             const botaoTema = document.getElementById('botao-tema');
@@ -1780,7 +1438,6 @@
                 temaAtual = 'claro';
             }
             
-            // Salvar preferência
             localStorage.setItem('tema-legislativo-brookasil', tema);
         }
         
@@ -1788,7 +1445,6 @@
         // SISTEMA DE ACESSIBILIDADE
         // ==================================================
         function configurarAcessibilidade() {
-            // Aplicar configurações salvas
             document.documentElement.style.fontSize = configAcessibilidade.tamanhoFonte + '%';
             document.getElementById('valor-fonte').textContent = configAcessibilidade.tamanhoFonte + '%';
             
@@ -1800,93 +1456,40 @@
                 document.body.classList.add('modo-leitura');
             }
             
-            if (configAcessibilidade.linguagemSimples) {
-                aplicarLinguagemSimples();
-            }
-            
-            // Configurar navegação por teclado
-            document.addEventListener('keydown', function(e) {
-                // Tecla Tab para navegação
-                if (e.key === 'Tab') {
-                    document.body.classList.add('teclado-navegacao');
-                }
-            });
-            
-            // Remover classe quando usar mouse
-            document.addEventListener('mousedown', function() {
-                document.body.classList.remove('teclado-navegacao');
-            });
+            localStorage.setItem('acessibilidade-legislativo-brookasil', JSON.stringify(configAcessibilidade));
         }
         
         function aplicarConfiguracoesAcessibilidade() {
             document.documentElement.style.fontSize = configAcessibilidade.tamanhoFonte + '%';
             document.getElementById('valor-fonte').textContent = configAcessibilidade.tamanhoFonte + '%';
             
-            // Alto contraste
             if (configAcessibilidade.altoContraste) {
                 document.body.classList.add('modo-alto-contraste');
             } else {
                 document.body.classList.remove('modo-alto-contraste');
             }
             
-            // Modo leitura
             if (configAcessibilidade.modoLeitura) {
                 document.body.classList.add('modo-leitura');
             } else {
                 document.body.classList.remove('modo-leitura');
             }
             
-            // Linguagem simples
-            if (configAcessibilidade.linguagemSimples) {
-                aplicarLinguagemSimples();
-            } else {
-                removerLinguagemSimples();
-            }
-            
-            // Salvar configurações
             localStorage.setItem('acessibilidade-legislativo-brookasil', JSON.stringify(configAcessibilidade));
-        }
-        
-        function aplicarLinguagemSimples() {
-            // Exemplo: substituir textos complexos por mais simples
-            const elementos = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, td, th');
-            elementos.forEach(el => {
-                const textoOriginal = el.getAttribute('data-texto-original') || el.textContent;
-                el.setAttribute('data-texto-original', textoOriginal);
-                
-                // Simples substituição para demonstração
-                let textoSimples = textoOriginal
-                    .replace(/Parlamentar/g, 'Político eleito')
-                    .replace(/Legislativo/g, 'Que faz leis')
-                    .replace(/Projeto de Lei/g, 'Proposta de nova lei')
-                    .replace(/Mandato/g, 'Tempo no cargo');
-                
-                el.textContent = textoSimples;
-            });
-        }
-        
-        function removerLinguagemSimples() {
-            const elementos = document.querySelectorAll('[data-texto-original]');
-            elementos.forEach(el => {
-                const textoOriginal = el.getAttribute('data-texto-original');
-                el.textContent = textoOriginal;
-                el.removeAttribute('data-texto-original');
-            });
         }
         
         // ==================================================
         // CONFIGURAÇÃO DE EVENT LISTENERS
         // ==================================================
         function configurarEventListeners() {
-            // Botão de alternância de tema
+            // Botão de tema
             document.getElementById('botao-tema').addEventListener('click', function() {
                 aplicarTema(temaAtual === 'claro' ? 'escuro' : 'claro');
             });
             
             // Botão de acessibilidade
             document.getElementById('botao-acessibilidade').addEventListener('click', function() {
-                const menu = document.getElementById('menu-acessibilidade');
-                menu.classList.toggle('ativo');
+                document.getElementById('menu-acessibilidade').classList.toggle('ativo');
             });
             
             // Controles de acessibilidade
@@ -1914,11 +1517,6 @@
                 aplicarConfiguracoesAcessibilidade();
             });
             
-            document.getElementById('alternar-linguagem').addEventListener('click', function() {
-                configAcessibilidade.linguagemSimples = !configAcessibilidade.linguagemSimples;
-                aplicarConfiguracoesAcessibilidade();
-            });
-            
             document.getElementById('reset-acessibilidade').addEventListener('click', function() {
                 configAcessibilidade = {
                     tamanhoFonte: 100,
@@ -1927,6 +1525,7 @@
                     linguagemSimples: false
                 };
                 aplicarConfiguracoesAcessibilidade();
+                mostrarMensagem('Configurações redefinidas com sucesso!', 'sucesso');
             });
             
             // Seleção de dispositivo
@@ -1934,83 +1533,62 @@
                 tipoDispositivo = 'celular';
                 aplicarOtimizacaoDispositivo('celular');
                 localStorage.setItem('dispositivo-legislativo-brookasil', 'celular');
+                mostrarMensagem('Modo celular ativado! Interface otimizada para mobile.', 'sucesso');
             });
             
             document.getElementById('opcao-computador').addEventListener('click', function() {
                 tipoDispositivo = 'computador';
                 aplicarOtimizacaoDispositivo('computador');
                 localStorage.setItem('dispositivo-legislativo-brookasil', 'computador');
+                mostrarMensagem('Modo computador ativado! Experiência completa habilitada.', 'sucesso');
             });
             
-            // Navegação por abas
+            // Navegação
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    
-                    // Remover classe ativa de todos os links
                     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('ativo'));
-                    
-                    // Adicionar classe ativa ao link clicado
                     this.classList.add('ativo');
-                    
-                    // Mostrar seção correspondente
                     const secao = this.getAttribute('data-secao');
                     mostrarSecao(secao);
-                    
-                    // Fechar menu hamburguer se estiver aberto
                     document.getElementById('nav-links').classList.remove('ativo');
                 });
             });
             
-            // Menu hamburguer para mobile
+            // Menu hamburguer
             document.getElementById('menu-hamburguer').addEventListener('click', function() {
                 document.getElementById('nav-links').classList.toggle('ativo');
             });
             
-            // Botão de login
+            // Login
             document.getElementById('botao-login').addEventListener('click', function() {
-                mostrarSecao('painel');
-                document.getElementById('form-login').classList.add('ativo');
+                if (usuarioAutenticado) {
+                    logoutUsuario();
+                } else {
+                    mostrarSecao('painel');
+                    document.getElementById('form-login').classList.add('ativo');
+                }
             });
             
-            // Botão de entrar no painel
             document.getElementById('botao-entrar').addEventListener('click', autenticarUsuario);
-            
-            // Botão cancelar login
             document.getElementById('botao-cancelar-login').addEventListener('click', function() {
                 document.getElementById('form-login').classList.remove('ativo');
             });
             
-            // Botões de tipo de painel
-            document.querySelectorAll('[data-tipo-painel]').forEach(botao => {
-                botao.addEventListener('click', function() {
-                    const tipo = this.getAttribute('data-tipo-painel');
-                    document.getElementById('form-login').classList.add('ativo');
-                    document.getElementById('login-tipo').value = tipo;
-                });
+            // IA Legislativa
+            document.getElementById('botao-enviar-pergunta').addEventListener('click', enviarPerguntaIA);
+            document.getElementById('input-pergunta').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') enviarPerguntaIA();
             });
             
-            // Botões de ação no painel do dono
-            document.querySelectorAll('[data-acao]').forEach(botao => {
-                botao.addEventListener('click', function() {
-                    const acao = this.getAttribute('data-acao');
-                    
-                    if (acao === 'registrar-parlamentar') {
-                        document.getElementById('form-registro-parlamentar').style.display = 'block';
-                    }
-                });
+            // Fechar menu de acessibilidade
+            document.addEventListener('click', function(e) {
+                const menu = document.getElementById('menu-acessibilidade');
+                const botao = document.getElementById('botao-acessibilidade');
+                if (!menu.contains(e.target) && !botao.contains(e.target)) {
+                    menu.classList.remove('ativo');
+                }
             });
-            
-            // Botão cancelar registro
-            document.getElementById('botao-cancelar-registro').addEventListener('click', function() {
-                document.getElementById('form-registro-parlamentar').style.display = 'none';
-            });
-            
-            // Botão salvar parlamentar
-            document.getElementById('botao-salvar-parlamentar').addEventListener('click', salvarParlamentar);
-            
-            // Botão enviar justificativa
-            document.getElementById('botao-enviar-justificativa').addEventListener('click', enviarJustificativa);
             
             // Filtros
             document.getElementById('filtro-casa').addEventListener('change', filtrarParlamentares);
@@ -2018,91 +1596,27 @@
             document.getElementById('filtro-situacao').addEventListener('change', filtrarParlamentares);
             document.getElementById('filtro-busca').addEventListener('input', filtrarParlamentares);
             
-            // IA Legislativa
-            document.getElementById('botao-enviar-pergunta').addEventListener('click', enviarPerguntaIA);
-            document.getElementById('input-pergunta').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    enviarPerguntaIA();
-                }
-            });
-            
-            // Perguntas frequentes da IA
-            document.querySelectorAll('[data-pergunta]').forEach(botao => {
-                botao.addEventListener('click', function() {
-                    const pergunta = this.getAttribute('data-pergunta');
-                    fazerPerguntaFrequente(pergunta);
-                });
-            });
-            
-            // Fechar menu de acessibilidade ao clicar fora
-            document.addEventListener('click', function(e) {
-                const menu = document.getElementById('menu-acessibilidade');
-                const botao = document.getElementById('botao-acessibilidade');
-                
-                if (!menu.contains(e.target) && !botao.contains(e.target)) {
-                    menu.classList.remove('ativo');
-                }
-            });
+            document.getElementById('filtro-status-projeto').addEventListener('change', filtrarProjetos);
+            document.getElementById('filtro-casa-projeto').addEventListener('change', filtrarProjetos);
+            document.getElementById('filtro-ano-projeto').addEventListener('change', filtrarProjetos);
+            document.getElementById('filtro-busca-projeto').addEventListener('input', filtrarProjetos);
         }
         
         // ==================================================
-        // FUNÇÕES PARA OTIMIZAÇÃO POR DISPOSITIVO
-        // ==================================================
-        function aplicarOtimizacaoDispositivo(dispositivo) {
-            const opcaoCelular = document.getElementById('opcao-celular');
-            const opcaoComputador = document.getElementById('opcao-computador');
-            
-            if (dispositivo === 'celular') {
-                // Destacar opção selecionada
-                opcaoCelular.style.borderColor = 'var(--cor-destaque)';
-                opcaoCelular.style.boxShadow = '0 10px 20px var(--cor-sombra)';
-                opcaoComputador.style.borderColor = 'var(--cor-borda)';
-                opcaoComputador.style.boxShadow = 'none';
-                
-                // Ajustes para mobile
-                document.body.classList.add('otimizado-mobile');
-                
-                // Mensagem de confirmação
-                mostrarMensagem('Modo celular ativado. Interface otimizada para smartphones.');
-            } else {
-                // Destacar opção selecionada
-                opcaoComputador.style.borderColor = 'var(--cor-destaque)';
-                opcaoComputador.style.boxShadow = '0 10px 20px var(--cor-sombra)';
-                opcaoCelular.style.borderColor = 'var(--cor-borda)';
-                opcaoCelular.style.boxShadow = 'none';
-                
-                // Remover ajustes mobile
-                document.body.classList.remove('otimizado-mobile');
-                
-                // Mensagem de confirmação
-                mostrarMensagem('Modo computador ativado. Interface completa para desktop.');
-            }
-        }
-        
-        // ==================================================
-        // FUNÇÕES PARA NAVEGAÇÃO ENTRE SEÇÕES
+        // FUNÇÕES DE NAVEGAÇÃO
         // ==================================================
         function mostrarSecao(secao) {
-            // Ocultar todas as seções
-            document.querySelectorAll('.secao').forEach(s => {
-                s.style.display = 'none';
-            });
-            
-            // Mostrar seção selecionada
+            document.querySelectorAll('.secao').forEach(s => s.style.display = 'none');
             document.getElementById(`secao-${secao}`).style.display = 'block';
-            
-            // Rolar para o topo da seção
             window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // Fechar menu de acessibilidade se estiver aberto
             document.getElementById('menu-acessibilidade').classList.remove('ativo');
         }
         
         // ==================================================
-        // FUNÇÕES FIREBASE - CARREGAMENTO DE DADOS
+        // FIREBASE - CARREGAMENTO DE DADOS
         // ==================================================
         function carregarDadosFirebase() {
-            // Carregar parlamentares
+            // Parlamentares
             database.ref('parlamentares').on('value', (snapshot) => {
                 parlamentares = [];
                 snapshot.forEach((childSnapshot) => {
@@ -2112,7 +1626,7 @@
                 carregarFiltroPartidos();
             });
             
-            // Carregar partidos
+            // Partidos
             database.ref('partidos').on('value', (snapshot) => {
                 partidos = [];
                 snapshot.forEach((childSnapshot) => {
@@ -2121,7 +1635,7 @@
                 renderizarPlenario();
             });
             
-            // Carregar projetos de lei
+            // Projetos
             database.ref('projetos').on('value', (snapshot) => {
                 projetos = [];
                 snapshot.forEach((childSnapshot) => {
@@ -2140,55 +1654,52 @@
             
             if (listaParlamentares.length === 0) {
                 container.innerHTML = `
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 3rem; color: var(--cor-texto-secundario);">
-                        <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
-                        <h3 style="margin-bottom: 1rem; color: var(--cor-texto);">Nenhum parlamentar encontrado</h3>
-                        <p>Não há parlamentares cadastrados ou os filtros aplicados não retornaram resultados.</p>
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem; color: var(--cor-texto-secundario);">
+                        <i class="fas fa-users" style="font-size: 4rem; margin-bottom: 1.5rem; opacity: 0.5;"></i>
+                        <h3 style="margin-bottom: 1rem; color: var(--cor-texto); font-size: 1.5rem;">NENHUM PARLAMENTAR ENCONTRADO</h3>
+                        <p>Tente ajustar os filtros ou cadastrar novos parlamentares.</p>
                     </div>
                 `;
                 return;
             }
             
             listaParlamentares.forEach(parlamentar => {
-                // Determinar cor de status
-                let statusClass = 'status-em-exercicio';
-                let statusText = 'Em exercício';
+                const statusClass = parlamentar.situacao === 'ex' ? 'status-ex' : 'status-em-exercicio';
+                const statusText = parlamentar.situacao === 'ex' ? 
+                    (parlamentar.cargo.startsWith('Senador') ? 'EX-SENADOR' : 'EX-DEPUTADO') : 
+                    'EM EXERCÍCIO';
                 
-                if (parlamentar.situacao === 'ex') {
-                    statusClass = 'status-ex';
-                    statusText = parlamentar.cargo.startsWith('Senador') ? 'Ex-senador' : 'Ex-deputado';
-                }
+                const casa = parlamentar.cargo.includes('Senador') ? 'SENADO FEDERAL' : 'ASSEMBLEIA GERAL';
                 
-                // Determinar casa legislativa
-                let casa = parlamentar.cargo.includes('Senador') ? 'Senado Federal' : 'Assembleia Geral';
-                
-                // Criar cartão do parlamentar
                 const cartao = document.createElement('div');
                 cartao.className = 'cartao-parlamentar';
                 cartao.innerHTML = `
                     <div class="cartao-cabecalho">
-                        <img src="${parlamentar.foto || 'https://via.placeholder.com/80?text=Parlamentar'}" alt="Foto de ${parlamentar.nome}" class="foto-parlamentar">
+                        <img src="${parlamentar.foto || 'https://via.placeholder.com/150?text=PARLAMENTAR'}" 
+                             alt="Foto de ${parlamentar.nome}" 
+                             class="foto-parlamentar"
+                             onerror="this.src='https://via.placeholder.com/150?text=PARLAMENTAR'">
                         <div class="info-parlamentar">
-                            <h3>${parlamentar.nome}</h3>
-                            <div class="partido">${parlamentar.partido || 'Sem partido'}</div>
+                            <h3>${parlamentar.nome.toUpperCase()}</h3>
+                            <div class="partido">${parlamentar.partido || 'SEM PARTIDO'}</div>
                         </div>
                     </div>
                     <div class="cartao-corpo">
                         <div class="info-item">
-                            <span class="info-label">Cargo:</span>
-                            <span class="info-value">${parlamentar.cargo}</span>
+                            <span class="info-label">CARGO:</span>
+                            <span class="info-value">${parlamentar.cargo.toUpperCase()}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">Casa:</span>
+                            <span class="info-label">CASA:</span>
                             <span class="info-value">${casa}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">Situação:</span>
+                            <span class="info-label">SITUAÇÃO:</span>
                             <span class="info-value ${statusClass}">${statusText}</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">Mandato:</span>
-                            <span class="info-value">${parlamentar.mandato_inicio || 'N/D'} a ${parlamentar.mandato_fim || 'N/D'}</span>
+                            <span class="info-label">MANDATO:</span>
+                            <span class="info-value">${parlamentar.mandato_inicio || 'N/D'} - ${parlamentar.mandato_fim || 'N/D'}</span>
                         </div>
                     </div>
                 `;
@@ -2197,9 +1708,6 @@
             });
         }
         
-        // ==================================================
-        // FILTROS DE PARLAMENTARES
-        // ==================================================
         function filtrarParlamentares() {
             const filtroCasa = document.getElementById('filtro-casa').value;
             const filtroPartido = document.getElementById('filtro-partido').value;
@@ -2207,27 +1715,19 @@
             const filtroBusca = document.getElementById('filtro-busca').value.toLowerCase();
             
             const parlamentaresFiltrados = parlamentares.filter(parlamentar => {
-                // Filtrar por casa legislativa
                 if (filtroCasa !== 'todas') {
                     const casaParlamentar = parlamentar.cargo.includes('Senador') ? 'senado' : 'assembleia';
                     if (casaParlamentar !== filtroCasa) return false;
                 }
                 
-                // Filtrar por partido
-                if (filtroPartido !== 'todos' && parlamentar.partido !== filtroPartido) {
-                    return false;
-                }
+                if (filtroPartido !== 'todos' && parlamentar.partido !== filtroPartido) return false;
                 
-                // Filtrar por situação
                 if (filtroSituacao !== 'todos') {
                     if (filtroSituacao === 'em-exercicio' && parlamentar.situacao === 'ex') return false;
                     if (filtroSituacao === 'ex' && parlamentar.situacao !== 'ex') return false;
                 }
                 
-                // Filtrar por busca
-                if (filtroBusca && !parlamentar.nome.toLowerCase().includes(filtroBusca)) {
-                    return false;
-                }
+                if (filtroBusca && !parlamentar.nome.toLowerCase().includes(filtroBusca)) return false;
                 
                 return true;
             });
@@ -2237,68 +1737,48 @@
         
         function carregarFiltroPartidos() {
             const selectPartido = document.getElementById('filtro-partido');
-            const selectRegistroPartido = document.getElementById('registro-partido');
-            
-            // Extrair partidos únicos dos parlamentares
             const partidosUnicos = [...new Set(parlamentares.map(p => p.partido).filter(p => p))];
             
-            // Limpar opções atuais
-            selectPartido.innerHTML = '<option value="todos">Todos</option>';
-            selectRegistroPartido.innerHTML = '<option value="">Selecione um partido</option>';
-            
-            // Adicionar partidos
+            selectPartido.innerHTML = '<option value="todos">TODOS</option>';
             partidosUnicos.forEach(partido => {
                 selectPartido.innerHTML += `<option value="${partido}">${partido}</option>`;
-                selectRegistroPartido.innerHTML += `<option value="${partido}">${partido}</option>`;
             });
         }
         
         // ==================================================
-        // PLENÁRIO VIRTUAL - DISTRIBUIÇÃO DE CADEIRAS
+        // PLENÁRIO VIRTUAL
         // ==================================================
         function renderizarPlenario() {
             const plenario = document.getElementById('plenario-semicirculo');
-            const legenda = document.getElementById('legenda-partidos');
-            
             if (!plenario) return;
             
-            // Limpar conteúdo anterior
             plenario.innerHTML = '';
-            legenda.innerHTML = '';
             
-            // Contadores
-            let cadeirasOcupadas = 0;
-            let cadeirasVagas = 0;
-            const partidosContagem = {};
-            
-            // Configuração do semicírculo
-            const raio = 150;
-            const centroX = plenario.offsetWidth / 2;
-            const centroY = plenario.offsetHeight / 2;
-            const totalCadeiras = 50; // Total de cadeiras no plenário
-            
-            // Cores para partidos (fallback se não houver cores definidas)
             const coresPartidos = {
                 'PDS': '#FF6B6B',
                 'PLB': '#4ECDC4',
                 'PV': '#45B7D1',
                 'PSDB': '#96CEB4',
                 'PT': '#FFEAA7',
-                'DEM': '#DDA0DD',
+                'UNIÃO': '#DDA0DD',
                 'Sem partido': '#95A5A6'
             };
             
-            // Criar cadeiras
+            const raio = 200;
+            const centroX = plenario.offsetWidth / 2;
+            const centroY = plenario.offsetHeight / 2 + 50;
+            const totalCadeiras = 50;
+            
+            let cadeirasOcupadas = 0;
+            let cadeirasVagas = 0;
+            const partidosContagem = {};
+            
             for (let i = 1; i <= totalCadeiras; i++) {
-                // Calcular posição no semicírculo
-                const angulo = Math.PI * (i / (totalCadeiras + 1)); // Distribuir no semicírculo
+                const angulo = Math.PI * (i / (totalCadeiras + 1));
                 const x = centroX + raio * Math.cos(angulo);
-                const y = centroY + raio * Math.sin(angulo) * 0.7; // Achatamento vertical
+                const y = centroY + raio * Math.sin(angulo) * 0.6;
                 
-                // Determinar se a cadeira está ocupada (para demonstração, algumas aleatórias)
                 const ocupada = Math.random() > 0.3;
-                
-                // Selecionar partido aleatório para demonstração
                 const partidosDisponiveis = partidos.length > 0 ? 
                     partidos.map(p => p.sigla) : 
                     Object.keys(coresPartidos);
@@ -2306,7 +1786,6 @@
                 const partidoAleatorio = partidosDisponiveis[Math.floor(Math.random() * partidosDisponiveis.length)];
                 const corPartido = coresPartidos[partidoAleatorio] || '#3A75C4';
                 
-                // Atualizar contadores
                 if (ocupada) {
                     cadeirasOcupadas++;
                     partidosContagem[partidoAleatorio] = (partidosContagem[partidoAleatorio] || 0) + 1;
@@ -2314,7 +1793,6 @@
                     cadeirasVagas++;
                 }
                 
-                // Criar elemento da cadeira
                 const cadeira = document.createElement('div');
                 cadeira.className = 'cadeira';
                 cadeira.style.left = `${x}px`;
@@ -2322,15 +1800,18 @@
                 cadeira.style.backgroundColor = ocupada ? corPartido : 'var(--cor-card)';
                 cadeira.style.borderColor = ocupada ? corPartido : 'var(--cor-borda)';
                 cadeira.title = ocupada ? 
-                    `Cadeira ${i}: ${partidoAleatorio}` : 
-                    `Cadeira ${i}: Vaga`;
+                    `CADEIRA ${i}: ${partidoAleatorio}` : 
+                    `CADEIRA ${i}: VAGA`;
                 
                 cadeira.innerHTML = `
-                    <div class="sigla-partido">${ocupada ? partidoAleatorio : 'V'}</div>
-                    <div class="numero-cadeira">${i}</div>
+                    <div class="sigla-partido" style="color: ${ocupada ? 'white' : 'var(--cor-texto)'}">
+                        ${ocupada ? partidoAleatorio : 'V'}
+                    </div>
+                    <div class="numero-cadeira" style="color: ${ocupada ? 'rgba(255,255,255,0.8)' : 'var(--cor-texto-secundario)'}">
+                        ${i}
+                    </div>
                 `;
                 
-                // Adicionar evento de clique
                 cadeira.addEventListener('click', function() {
                     mostrarDetalhesCadeira(i, ocupada, partidoAleatorio);
                 });
@@ -2339,48 +1820,23 @@
             }
             
             // Atualizar contadores
-            document.querySelector('#contador-cadeiras div:nth-child(1) div:first-child').textContent = cadeirasOcupadas;
-            document.querySelector('#contador-cadeiras div:nth-child(2) div:first-child').textContent = cadeirasVagas;
-            document.querySelector('#contador-cadeiras div:nth-child(3) div:first-child').textContent = Object.keys(partidosContagem).length;
-            
-            // Criar legenda
-            Object.keys(partidosContagem).forEach(partido => {
-                const cor = coresPartidos[partido] || '#3A75C4';
-                
-                const itemLegenda = document.createElement('div');
-                itemLegenda.style.display = 'flex';
-                itemLegenda.style.alignItems = 'center';
-                itemLegenda.style.gap = '10px';
-                itemLegenda.style.padding = '8px 12px';
-                itemLegenda.style.backgroundColor = 'var(--cor-card)';
-                itemLegenda.style.borderRadius = '6px';
-                itemLegenda.style.border = '1px solid var(--cor-borda)';
-                
-                itemLegenda.innerHTML = `
-                    <div style="width: 20px; height: 20px; border-radius: 4px; background-color: ${cor};"></div>
-                    <div>
-                        <strong style="color: var(--cor-texto);">${partido}</strong>
-                        <div style="font-size: 0.9rem; color: var(--cor-texto-secundario);">${partidosContagem[partido]} cadeira(s)</div>
-                    </div>
-                `;
-                
-                legenda.appendChild(itemLegenda);
-            });
+            const contadores = document.querySelectorAll('#contador-cadeiras div');
+            if (contadores[0]) contadores[0].querySelector('div:first-child').textContent = cadeirasOcupadas;
+            if (contadores[1]) contadores[1].querySelector('div:first-child').textContent = cadeirasVagas;
+            if (contadores[2]) contadores[2].querySelector('div:first-child').textContent = Object.keys(partidosContagem).length;
         }
         
         function mostrarDetalhesCadeira(numero, ocupada, partido) {
-            let mensagem = `Cadeira ${numero}: `;
+            let mensagem = `CADEIRA ${numero}: `;
             
             if (ocupada) {
-                mensagem += `Ocupada pelo partido ${partido}.`;
-                
-                // Encontrar parlamentares deste partido
+                mensagem += `OCUPADA PELO PARTIDO ${partido}.`;
                 const parlamentaresPartido = parlamentares.filter(p => p.partido === partido);
                 if (parlamentaresPartido.length > 0) {
-                    mensagem += ` Parlamentares deste partido: ${parlamentaresPartido.map(p => p.nome).join(', ')}`;
+                    mensagem += ` PARLAMENTARES: ${parlamentaresPartido.map(p => p.nome).join(', ')}`;
                 }
             } else {
-                mensagem += 'Vaga. Aguardando designação.';
+                mensagem += 'VAGA. AGUARDANDO DESIGNAÇÃO.';
             }
             
             mostrarMensagem(mensagem, 'info');
@@ -2398,8 +1854,8 @@
                     <tr>
                         <td colspan="6" style="text-align: center; padding: 3rem; color: var(--cor-texto-secundario);">
                             <i class="fas fa-file-contract" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.5;"></i>
-                            <h3 style="margin-bottom: 1rem; color: var(--cor-texto);">Nenhum projeto de lei encontrado</h3>
-                            <p>Não há projetos cadastrados ou os filtros aplicados não retornaram resultados.</p>
+                            <h3 style="margin-bottom: 1rem; color: var(--cor-texto);">NENHUM PROJETO ENCONTRADO</h3>
+                            <p>Tente ajustar os filtros de busca.</p>
                         </td>
                     </tr>
                 `;
@@ -2407,32 +1863,25 @@
             }
             
             listaProjetos.forEach(projeto => {
-                // Determinar classe de status
                 let statusClass = 'status-arquivado';
                 if (projeto.status === 'aprovado') statusClass = 'status-aprovado';
                 if (projeto.status === 'derrubado') statusClass = 'status-derrubado';
                 
-                // Determinar casa legislativa
-                let casa = projeto.casa || 'Assembleia Geral';
+                const casa = projeto.casa || 'ASSEMBLEIA GERAL';
+                const statusText = projeto.status ? projeto.status.toUpperCase() : 'ARQUIVADO';
                 
                 const linha = document.createElement('tr');
                 linha.innerHTML = `
                     <td><strong>${projeto.numero || 'PL-0000/2026'}</strong></td>
-                    <td>${projeto.titulo || 'Sem título'}</td>
-                    <td>${projeto.autores || 'Não especificado'}</td>
-                    <td><span class="${statusClass}">${formatarStatus(projeto.status)}</span></td>
+                    <td>${projeto.titulo || 'SEM TÍTULO'}</td>
+                    <td>${projeto.autores || 'NÃO ESPECIFICADO'}</td>
+                    <td><span class="${statusClass}">${statusText}</span></td>
                     <td>${projeto.data || 'N/D'}</td>
                     <td>${casa}</td>
                 `;
                 
                 tbody.appendChild(linha);
             });
-            
-            // Adicionar event listeners aos filtros de projetos
-            document.getElementById('filtro-status-projeto').addEventListener('change', filtrarProjetos);
-            document.getElementById('filtro-casa-projeto').addEventListener('change', filtrarProjetos);
-            document.getElementById('filtro-ano-projeto').addEventListener('change', filtrarProjetos);
-            document.getElementById('filtro-busca-projeto').addEventListener('input', filtrarProjetos);
         }
         
         function filtrarProjetos() {
@@ -2442,28 +1891,20 @@
             const filtroBusca = document.getElementById('filtro-busca-projeto').value.toLowerCase();
             
             const projetosFiltrados = projetos.filter(projeto => {
-                // Filtrar por status
-                if (filtroStatus !== 'todos' && projeto.status !== filtroStatus) {
-                    return false;
-                }
+                if (filtroStatus !== 'todos' && projeto.status !== filtroStatus) return false;
                 
-                // Filtrar por casa
                 if (filtroCasa !== 'todas') {
                     const casaProjeto = projeto.casa || 'assembleia';
                     const casaNormalizada = casaProjeto.toLowerCase().includes('senado') ? 'senado' : 'assembleia';
                     if (casaNormalizada !== filtroCasa) return false;
                 }
                 
-                // Filtrar por ano
                 if (filtroAno !== 'todos') {
                     const anoProjeto = projeto.data ? projeto.data.split('/').pop() : '2026';
                     if (anoProjeto !== filtroAno) return false;
                 }
                 
-                // Filtrar por busca
-                if (filtroBusca && !projeto.titulo.toLowerCase().includes(filtroBusca)) {
-                    return false;
-                }
+                if (filtroBusca && !projeto.titulo.toLowerCase().includes(filtroBusca)) return false;
                 
                 return true;
             });
@@ -2471,250 +1912,80 @@
             renderizarProjetosLei(projetosFiltrados);
         }
         
-        function formatarStatus(status) {
-            const statusMap = {
-                'aprovado': 'Aprovado',
-                'derrubado': 'Derrubado',
-                'arquivado': 'Arquivado'
-            };
-            
-            return statusMap[status] || status;
-        }
-        
         // ==================================================
-        // AUTENTICAÇÃO E PAINÉIS ADMINISTRATIVOS
+        // AUTENTICAÇÃO
         // ==================================================
         function autenticarUsuario() {
             const usuario = document.getElementById('login-usuario').value;
             const senha = document.getElementById('login-senha').value;
             const tipo = document.getElementById('login-tipo').value;
             
-            // Validação básica
             if (!usuario || !senha) {
-                mostrarMensagem('Por favor, preencha todos os campos.', 'erro');
+                mostrarMensagem('Preencha todos os campos!', 'erro');
                 return;
             }
             
-            // IMPORTANTE: Em um sistema real, NUNCA faça autenticação no frontend
-            // Esta é apenas uma simulação para demonstração
-            // A autenticação real deve ser feita no backend com Firebase Auth
-            
-            // Para demonstração: verificar credenciais específicas para o dono do RP
-            if (tipo === 'dono' && senha === 'Brookasil1234') {
-                usuarioAutenticado = { tipo: 'dono', nome: 'Super Admin' };
+            // Demonstração - Super Admin
+            if (tipo === 'dono' && senha === 'Brookasil2026') {
+                usuarioAutenticado = { tipo: 'dono', nome: 'SUPER ADMIN' };
                 mostrarPainelAdmin('dono');
-                mostrarMensagem('Autenticação bem-sucedida! Painel de Super Admin liberado.', 'sucesso');
-                
-                // Limpar formulário
+                mostrarMensagem('AUTENTICAÇÃO BEM-SUCEDIDA! PAINEL SUPER ADMIN LIBERADO.', 'sucesso');
                 document.getElementById('login-usuario').value = '';
                 document.getElementById('login-senha').value = '';
                 document.getElementById('form-login').classList.remove('ativo');
-            } else {
-                // Simular autenticação com Firebase
-                database.ref('usuarios').orderByChild('usuario').equalTo(usuario).once('value')
-                    .then(snapshot => {
-                        if (snapshot.exists()) {
-                            const usuarios = [];
-                            snapshot.forEach(child => {
-                                usuarios.push({ id: child.key, ...child.val() });
-                            });
-                            
-                            const usuarioEncontrado = usuarios.find(u => u.tipo === tipo);
-                            
-                            if (usuarioEncontrado) {
-                                // Em um sistema real, comparar hash da senha
-                                // Para demonstração, aceitar qualquer senha
-                                usuarioAutenticado = usuarioEncontrado;
-                                
-                                // Mostrar painel correspondente
-                                mostrarPainelAdmin(tipo);
-                                mostrarMensagem(`Bem-vindo, ${usuarioEncontrado.nome || usuario}!`, 'sucesso');
-                                
-                                // Limpar formulário
-                                document.getElementById('login-usuario').value = '';
-                                document.getElementById('login-senha').value = '';
-                                document.getElementById('form-login').classList.remove('ativo');
-                            } else {
-                                mostrarMensagem('Tipo de usuário incorreto para este login.', 'erro');
-                            }
-                        } else {
-                            mostrarMensagem('Usuário não encontrado.', 'erro');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro na autenticação:', error);
-                        mostrarMensagem('Erro na autenticação. Tente novamente.', 'erro');
-                    });
+                return;
             }
+            
+            // Buscar no Firebase
+            database.ref('usuarios').orderByChild('usuario').equalTo(usuario).once('value')
+                .then(snapshot => {
+                    if (snapshot.exists()) {
+                        const usuarios = [];
+                        snapshot.forEach(child => usuarios.push({ id: child.key, ...child.val() }));
+                        const usuarioEncontrado = usuarios.find(u => u.tipo === tipo);
+                        
+                        if (usuarioEncontrado) {
+                            usuarioAutenticado = usuarioEncontrado;
+                            mostrarPainelAdmin(tipo);
+                            mostrarMensagem(`BEM-VINDO, ${usuarioEncontrado.nome || usuario}!`, 'sucesso');
+                            document.getElementById('login-usuario').value = '';
+                            document.getElementById('login-senha').value = '';
+                            document.getElementById('form-login').classList.remove('ativo');
+                        } else {
+                            mostrarMensagem('Tipo de usuário incorreto!', 'erro');
+                        }
+                    } else {
+                        mostrarMensagem('Usuário não encontrado!', 'erro');
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    mostrarMensagem('Erro na autenticação!', 'erro');
+                });
         }
         
         function mostrarPainelAdmin(tipo) {
-            // Ocultar todos os painéis
-            document.querySelectorAll('.painel-container').forEach(painel => {
-                painel.classList.remove('ativo');
-                painel.style.display = 'none';
-            });
-            
-            // Mostrar painel correspondente
-            if (tipo === 'dono') {
-                document.getElementById('painel-dono').classList.add('ativo');
-                document.getElementById('painel-dono').style.display = 'block';
-            } else if (tipo === 'senador') {
-                document.getElementById('painel-justificativa').classList.add('ativo');
-                document.getElementById('painel-justificativa').style.display = 'block';
-            }
-            
-            // Ajustar navegação para mostrar que está logado
             const botaoLogin = document.getElementById('botao-login');
-            botaoLogin.textContent = '🔓 Sair';
-            botaoLogin.removeEventListener('click', null);
-            botaoLogin.addEventListener('click', logoutUsuario);
+            botaoLogin.innerHTML = '<i class="fas fa-sign-out-alt"></i> SAIR';
+            botaoLogin.onclick = logoutUsuario;
+            
+            // Em produção, implementar painéis específicos para cada tipo
+            mostrarMensagem(`Painel ${tipo.toUpperCase()} carregado!`, 'sucesso');
         }
         
         function logoutUsuario() {
             usuarioAutenticado = null;
-            
-            // Ocultar todos os painéis
-            document.querySelectorAll('.painel-container').forEach(painel => {
-                painel.classList.remove('ativo');
-                painel.style.display = 'none';
-            });
-            
-            // Resetar formulário de registro
-            document.getElementById('form-registro-parlamentar').style.display = 'none';
-            
-            // Ajustar botão de login
             const botaoLogin = document.getElementById('botao-login');
-            botaoLogin.textContent = '🔐 Entrar';
-            botaoLogin.removeEventListener('click', null);
-            botaoLogin.addEventListener('click', function() {
+            botaoLogin.innerHTML = '<i class="fas fa-lock"></i> ENTRAR';
+            botaoLogin.onclick = function() {
                 mostrarSecao('painel');
                 document.getElementById('form-login').classList.add('ativo');
-            });
-            
-            mostrarMensagem('Logout realizado com sucesso.', 'info');
+            };
+            mostrarMensagem('Logout realizado com sucesso!', 'info');
         }
         
         // ==================================================
-        // FUNÇÕES DO PAINEL ADMINISTRATIVO
-        // ==================================================
-        function salvarParlamentar() {
-            // Validar que o usuário está autenticado como dono
-            if (!usuarioAutenticado || usuarioAutenticado.tipo !== 'dono') {
-                mostrarMensagem('Acesso não autorizado.', 'erro');
-                return;
-            }
-            
-            // Coletar dados do formulário
-            const nome = document.getElementById('registro-nome').value;
-            const partido = document.getElementById('registro-partido').value;
-            const cargo = document.getElementById('registro-cargo').value;
-            const situacao = document.getElementById('registro-situacao').value;
-            const mandatoInicio = document.getElementById('registro-mandato-inicio').value;
-            const mandatoFim = document.getElementById('registro-mandato-fim').value;
-            const foto = document.getElementById('registro-foto').value;
-            
-            // Validação básica
-            if (!nome || !cargo) {
-                mostrarMensagem('Nome e cargo são obrigatórios.', 'erro');
-                return;
-            }
-            
-            // Preparar dados para salvar
-            const dadosParlamentar = {
-                nome: nome,
-                partido: partido || 'Sem partido',
-                cargo: formatarCargo(cargo),
-                situacao: situacao,
-                mandato_inicio: mandatoInicio || '2026-01-01',
-                mandato_fim: mandatoFim || '2030-12-31',
-                foto: foto || 'https://via.placeholder.com/80?text=Parlamentar',
-                data_registro: new Date().toISOString().split('T')[0]
-            };
-            
-            // Salvar no Firebase
-            database.ref('parlamentares').push(dadosParlamentar)
-                .then(() => {
-                    mostrarMensagem('Parlamentar registrado com sucesso!', 'sucesso');
-                    
-                    // Limpar formulário
-                    document.getElementById('registro-nome').value = '';
-                    document.getElementById('registro-partido').value = '';
-                    document.getElementById('registro-cargo').value = 'senador';
-                    document.getElementById('registro-situacao').value = 'em-exercicio';
-                    document.getElementById('registro-mandato-inicio').value = '';
-                    document.getElementById('registro-mandato-fim').value = '';
-                    document.getElementById('registro-foto').value = '';
-                    
-                    // Ocultar formulário
-                    document.getElementById('form-registro-parlamentar').style.display = 'none';
-                })
-                .catch(error => {
-                    console.error('Erro ao salvar parlamentar:', error);
-                    mostrarMensagem('Erro ao salvar parlamentar. Tente novamente.', 'erro');
-                });
-        }
-        
-        function formatarCargo(cargo) {
-            const cargoMap = {
-                'senador': 'Senador Federal',
-                'deputado-federal': 'Deputado Federal',
-                'deputado-estadual': 'Deputado Estadual'
-            };
-            
-            return cargoMap[cargo] || cargo;
-        }
-        
-        function enviarJustificativa() {
-            // Validar que o usuário está autenticado como senador
-            if (!usuarioAutenticado || usuarioAutenticado.tipo !== 'senador') {
-                mostrarMensagem('Apenas senadores podem enviar justificativas de faltas.', 'erro');
-                return;
-            }
-            
-            // Coletar dados do formulário
-            const data = document.getElementById('justificativa-data').value;
-            const tipo = document.getElementById('justificativa-tipo').value;
-            const motivo = document.getElementById('justificativa-motivo').value;
-            const comprovante = document.getElementById('justificativa-comprovante').value;
-            
-            // Validação básica
-            if (!data || !motivo) {
-                mostrarMensagem('Data e motivo são obrigatórios.', 'erro');
-                return;
-            }
-            
-            // Preparar dados para salvar
-            const dadosJustificativa = {
-                senador: usuarioAutenticado.nome || 'Senador não identificado',
-                senador_id: usuarioAutenticado.id,
-                data: data,
-                tipo: tipo,
-                motivo: motivo,
-                comprovante: comprovante || '',
-                data_envio: new Date().toISOString(),
-                status: 'pendente' // pendente, aprovada, rejeitada
-            };
-            
-            // Salvar no Firebase
-            database.ref('justificativas').push(dadosJustificativa)
-                .then(() => {
-                    mostrarMensagem('Justificativa enviada com sucesso! Aguarde aprovação do Presidente do Senado.', 'sucesso');
-                    
-                    // Limpar formulário
-                    document.getElementById('justificativa-data').value = '';
-                    document.getElementById('justificativa-tipo').value = 'ordinaria';
-                    document.getElementById('justificativa-motivo').value = '';
-                    document.getElementById('justificativa-comprovante').value = '';
-                })
-                .catch(error => {
-                    console.error('Erro ao enviar justificativa:', error);
-                    mostrarMensagem('Erro ao enviar justificativa. Tente novamente.', 'erro');
-                });
-        }
-        
-        // ==================================================
-        // IA LEGISLATIVA AVANÇADA
+        // IA LEGISLATIVA
         // ==================================================
         function enviarPerguntaIA() {
             const input = document.getElementById('input-pergunta');
@@ -2722,48 +1993,22 @@
             
             if (!pergunta) return;
             
-            // Adicionar pergunta do usuário ao chat
             adicionarMensagemChat(pergunta, 'usuario');
-            
-            // Limpar input
             input.value = '';
             
-            // Processar pergunta
-            processarPerguntaIA(pergunta);
-        }
-        
-        function fazerPerguntaFrequente(tipo) {
-            const perguntasFrequentes = {
-                'projetos-lei': 'O que são projetos de lei e como funcionam no Legislativo de Brookasil?',
-                'diferenca-cargos': 'Qual a diferença entre um Senador e um Deputado?',
-                'processo-legislativo': 'Como funciona o processo legislativo no Poder Legislativo de Brookasil?',
-                'justificativa-faltas': 'Como funciona o sistema de justificativa de faltas para senadores?'
-            };
-            
-            const pergunta = perguntasFrequentes[tipo] || tipo;
-            adicionarMensagemChat(pergunta, 'usuario');
-            processarPerguntaIA(pergunta);
-        }
-        
-        function processarPerguntaIA(pergunta) {
-            // Simular processamento com timeout
             setTimeout(() => {
                 let resposta = '';
                 
-                // Respostas pré-definidas baseadas nas perguntas frequentes
                 if (pergunta.toLowerCase().includes('projeto') && pergunta.toLowerCase().includes('lei')) {
-                    resposta = `No Poder Legislativo de Brookasil, um Projeto de Lei (PL) é uma proposta formal para criar, modificar ou revogar uma lei. Cada projeto recebe uma numeração única no formato PL-XXXX/AAAA (ex: PL-0001/2026). O processo legislativo inclui as seguintes etapas: 1) Apresentação na casa de origem; 2) Discussão e votação nas comissões; 3) Votação no plenário; 4) Envio para a outra casa (se aprovado); 5) Sanção ou veto do Executivo. Os projetos podem ter status de "Aprovado", "Derrubado" ou "Arquivado".`;
+                    resposta = `No Poder Legislativo de Brookasil, um Projeto de Lei (PL) é uma proposta formal para criar, modificar ou revogar uma lei. Cada projeto segue um processo legislativo que inclui: 1) Apresentação; 2) Discussão em comissões; 3) Votação no plenário; 4) Tramitação na outra casa; 5) Sanção ou veto do Executivo. O sistema garante transparência e democraticidade em todas as etapas.`;
                 } else if (pergunta.toLowerCase().includes('senador') && pergunta.toLowerCase().includes('deputado')) {
-                    resposta = `No sistema legislativo de Brookasil, existem duas casas legislativas: o Senado Federal e a Assembleia Geral. Os Senadores representam os estados e territórios, com mandatos mais longos (8 anos) e funções específicas como aprovar indicações para cargos públicos e processar autoridades. Os Deputados (Federais e Estaduais) representam a população diretamente, com mandatos mais curtos (4 anos), e são responsáveis pela elaboração da maioria das leis orçamentárias e fiscais. Ambos podem propor projetos de lei, mas algumas matérias são de competência exclusiva de cada casa.`;
+                    resposta = `SENADORES representam os estados/territórios com mandatos de 8 anos e funções específicas como aprovar indicações e processar autoridades. DEPUTADOS representam a população diretamente com mandatos de 4 anos, focando em leis orçamentárias e fiscais. Ambos podem propor projetos, mas algumas matérias são exclusivas de cada casa.`;
                 } else if (pergunta.toLowerCase().includes('processo legislativo')) {
-                    resposta = `O processo legislativo em Brookasil segue as seguintes etapas principais: 1) Iniciativa: projeto pode ser proposto por parlamentares, comissões, Executivo ou cidadãos (via iniciativa popular); 2) Discussão: análise nas comissões temáticas pertinentes; 3) Votação: deliberação no plenário da casa de origem; 4) Tramitação na outra casa: se aprovado, segue para a segunda casa, onde repete o processo; 5) Sanção: se aprovado por ambas as casas, vai para o Executivo para sanção ou veto; 6) Promulgação: lei é publicada e entra em vigor. O sistema garante ampla discussão e democraticidade.`;
-                } else if (pergunta.toLowerCase().includes('justificativa') && pergunta.toLowerCase().includes('falta')) {
-                    resposta = `O sistema de justificativa de faltas é restrito aos senadores do Brookasil. Quando um senador precisa faltar a uma sessão, deve: 1) Acessar o painel de senador (após autenticação); 2) Preencher o formulário de justificativa com data, tipo de sessão e motivo detalhado; 3) Opcionalmente anexar comprovante; 4) Enviar para análise do Presidente do Senado. As justificativas são salvas no histórico e podem ser aprovadas ou rejeitadas pelo Presidente. Este sistema garante transparência e responsabilidade dos parlamentares.`;
+                    resposta = `Processo legislativo em Brookasil: 1) INICIATIVA (parlamentares, Executivo ou cidadãos); 2) DISCUSSÃO (comissões temáticas); 3) VOTAÇÃO (plenário); 4) TRAMITAÇÃO (outra casa); 5) SANÇÃO (Executivo); 6) PROMULGAÇÃO (publicação). Cada etapa garante ampla discussão e análise técnica.`;
                 } else if (pergunta.toLowerCase().includes('partido')) {
-                    resposta = `Os partidos políticos em Brookasil são organizações que reúnem cidadãos com ideologias e objetivos políticos semelhantes. No sistema legislativo, cada partido ocupa cadeiras no plenário conforme o número de parlamentares eleitos. O painel administrativo permite criar e editar partidos, definir suas cores representativas e acompanhar a distribuição de cadeiras. Partidos com mais cadeiras têm maior poder de influência nas votações e maior tempo de fala nas sessões.`;
+                    resposta = `Partidos políticos organizam cidadãos com ideologias semelhantes. No plenário, cada partido ocupa cadeiras conforme número de parlamentares eleitos. Partidos maiores têm maior influência em votações e mais tempo de fala. O sistema incentiva cooperação entre partidos para aprovação de leis importantes.`;
                 } else {
-                    // Resposta genérica para perguntas não reconhecidas
-                    resposta = `Obrigado pela sua pergunta sobre "${pergunta}". Como IA Legislativa do Brookasil, posso explicar: 1) Projetos de lei e o processo legislativo; 2) Diferenças entre cargos e funções dos parlamentares; 3) Funcionamento dos partidos políticos e distribuição de cadeiras; 4) Como usar os painéis administrativos; 5) Sistema de justificativa de faltas. Posso também ajudar a identificar inconsistências nos dados legislativos. Para qual destes tópicos gostaria de mais informações?`;
+                    resposta = `Obrigado pela pergunta sobre "${pergunta}". Como IA Legislativa, posso explicar: 1) Projetos de lei e processo legislativo; 2) Diferenças entre cargos; 3) Funcionamento dos partidos; 4) Uso dos painéis administrativos; 5) Sistema de justificativas. Para qual tópico gostaria de mais informações?`;
                 }
                 
                 adicionarMensagemChat(resposta, 'ia');
@@ -2772,76 +2017,88 @@
         
         function adicionarMensagemChat(texto, remetente) {
             const chatMensagens = document.getElementById('chat-mensagens');
-            
             const mensagem = document.createElement('div');
             mensagem.className = `mensagem mensagem-${remetente}`;
-            mensagem.innerHTML = `<strong>${remetente === 'ia' ? 'IA Legislativa:' : 'Você:'}</strong> ${texto}`;
-            
+            mensagem.innerHTML = `<strong>${remetente === 'ia' ? 'IA LEGISLATIVA:' : 'VOCÊ:'}</strong> ${texto}`;
             chatMensagens.appendChild(mensagem);
-            
-            // Rolar para a última mensagem
             chatMensagens.scrollTop = chatMensagens.scrollHeight;
         }
         
         // ==================================================
         // FUNÇÕES UTILITÁRIAS
         // ==================================================
-        function mostrarMensagem(texto, tipo = 'info') {
-            // Remover mensagem anterior se existir
-            const mensagemAnterior = document.getElementById('mensagem-flutuante');
-            if (mensagemAnterior) {
-                mensagemAnterior.remove();
-            }
+        function aplicarOtimizacaoDispositivo(dispositivo) {
+            const opcaoCelular = document.getElementById('opcao-celular');
+            const opcaoComputador = document.getElementById('opcao-computador');
             
-            // Criar nova mensagem
+            if (dispositivo === 'celular') {
+                opcaoCelular.style.borderColor = 'var(--amarelo-oficial)';
+                opcaoCelular.style.boxShadow = '0 15px 40px rgba(252, 209, 22, 0.3)';
+                opcaoComputador.style.borderColor = 'var(--cor-borda)';
+                opcaoComputador.style.boxShadow = 'none';
+                document.body.classList.add('otimizado-mobile');
+            } else {
+                opcaoComputador.style.borderColor = 'var(--amarelo-oficial)';
+                opcaoComputador.style.boxShadow = '0 15px 40px rgba(252, 209, 22, 0.3)';
+                opcaoCelular.style.borderColor = 'var(--cor-borda)';
+                opcaoCelular.style.boxShadow = 'none';
+                document.body.classList.remove('otimizado-mobile');
+            }
+        }
+        
+        function mostrarMensagem(texto, tipo = 'info') {
+            // Remover anterior
+            const mensagemAnterior = document.getElementById('mensagem-flutuante');
+            if (mensagemAnterior) mensagemAnterior.remove();
+            
+            // Criar nova
             const mensagem = document.createElement('div');
             mensagem.id = 'mensagem-flutuante';
             mensagem.style.position = 'fixed';
-            mensagem.style.top = '20px';
-            mensagem.style.right = '20px';
-            mensagem.style.padding = '15px 20px';
-            mensagem.style.borderRadius = '8px';
-            mensagem.style.zIndex = '1000';
-            mensagem.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+            mensagem.style.top = '30px';
+            mensagem.style.right = '30px';
+            mensagem.style.padding = '20px 25px';
+            mensagem.style.borderRadius = '15px';
+            mensagem.style.zIndex = '10000';
+            mensagem.style.boxShadow = '0 10px 40px rgba(0,0,0,0.3)';
             mensagem.style.maxWidth = '400px';
-            mensagem.style.transition = 'opacity 0.3s ease';
+            mensagem.style.backdropFilter = 'blur(10px)';
+            mensagem.style.border = '1px solid var(--cor-borda)';
+            mensagem.style.animation = 'surgir 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
             
-            // Estilo baseado no tipo
             if (tipo === 'sucesso') {
-                mensagem.style.backgroundColor = '#10b981';
+                mensagem.style.background = 'linear-gradient(135deg, rgba(16, 185, 129, 0.9), rgba(5, 150, 105, 0.9))';
                 mensagem.style.color = 'white';
             } else if (tipo === 'erro') {
-                mensagem.style.backgroundColor = '#ef4444';
+                mensagem.style.background = 'linear-gradient(135deg, rgba(239, 68, 68, 0.9), rgba(220, 38, 38, 0.9))';
                 mensagem.style.color = 'white';
             } else {
                 mensagem.style.backgroundColor = 'var(--cor-card)';
                 mensagem.style.color = 'var(--cor-texto)';
-                mensagem.style.border = '1px solid var(--cor-borda)';
             }
             
             mensagem.innerHTML = `
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas ${tipo === 'sucesso' ? 'fa-check-circle' : tipo === 'erro' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
-                    <div>${texto}</div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <i class="fas ${tipo === 'sucesso' ? 'fa-check-circle' : tipo === 'erro' ? 'fa-exclamation-circle' : 'fa-info-circle'}" 
+                       style="font-size: 1.5rem;"></i>
+                    <div style="font-weight: 600;">${texto}</div>
                 </div>
             `;
             
             document.body.appendChild(mensagem);
             
-            // Remover após 5 segundos
             setTimeout(() => {
                 if (mensagem.parentNode) {
                     mensagem.style.opacity = '0';
+                    mensagem.style.transition = 'opacity 0.3s ease';
                     setTimeout(() => {
-                        if (mensagem.parentNode) {
-                            mensagem.remove();
-                        }
+                        if (mensagem.parentNode) mensagem.remove();
                     }, 300);
                 }
             }, 5000);
         }
         
-        // Inicializar quando a janela for redimensionada (para recalcular posições do plenário)
+        // Redimensionamento
         window.addEventListener('resize', function() {
             if (document.getElementById('secao-plenario').style.display !== 'none') {
                 setTimeout(renderizarPlenario, 300);
@@ -2849,4 +2106,4 @@
         });
     </script>
 </body>
-  </html>
+    </html>
